@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="40dp"
+    android:paddingTop="20dp"
+    android:paddingRight="40dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <EditText
+            android:id="@+id/accountEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/app_selector_input"
+            android:gravity="center_vertical"
+            android:hint="请输入账号"
+            android:maxLines="1"
+            android:paddingLeft="40dp"
+            android:textColor="#666" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:src="@drawable/app_account" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/passwordEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/app_selector_input"
+            android:gravity="center_vertical"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:paddingLeft="40dp"
+            android:textColor="#666" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:src="@drawable/app_password" />
+
+        <ImageView
+            android:id="@+id/openImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/close" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <CheckBox
+            android:id="@+id/rememberPW"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="记住密码"
+            android:textColor="#aaa" />
+
+        <CheckBox
+            android:id="@+id/autoLand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自动登陆"
+            android:textColor="#aaa" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/forgetPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="忘记密码"
+            android:textColor="#aaa" />
+
+    </LinearLayout>
+
+
+    <!--确定按钮-->
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/confirmBt"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:enabled="false"
+        android:text="登&#12288;&#12288;陆"
+        android:textColor="#fff"
+        app:qmui_borderWidth="0dp"
+        app:qmui_backgroundColor="@drawable/selector_bt_color"
+        app:qmui_isRadiusAdjustBounds="true" />
+
+</LinearLayout>

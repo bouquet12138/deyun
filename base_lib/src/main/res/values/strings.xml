@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">baseLib</string>
+    <string name="error_gif">error</string>
+    <string name="channel_critical">
+        紧急
+    </string>
+    <string name="channel_importance">重要</string>
+    <string name="channel_default">默认</string>
+    <string name="channel_low">低</string>
+    <string name="channel_media">媒体</string>
+
+</resources>

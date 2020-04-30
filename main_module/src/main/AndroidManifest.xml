@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.main_module">
+
+    <application
+        android:name="com.example.baselib.base.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon_circle"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.MainStartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.CityServicesActivity" />
+        <activity android:name=".activity.PromotionActivity" />
+        <activity android:name=".activity.ServiceCenterActivity" />
+        <activity android:name=".activity.OptionActivity" />
+        <activity android:name=".activity.AppUpdateActivity" />
+        <activity android:name=".activity.ModifyPayPasswordActivity" />
+        <activity android:name=".activity.ModifyPasswordActivity" />
+        <activity android:name=".activity.AccountManagerActivity" />
+        <activity android:name=".activity.AboutUsActivity" />
+        <activity android:name=".activity.MainActivity">
+        </activity>
+    </application>
+
+</manifest>

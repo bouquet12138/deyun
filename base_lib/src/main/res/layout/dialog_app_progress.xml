@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+   <RelativeLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
+
+       <ImageView
+           android:id="@+id/gifImg"
+           android:layout_centerInParent="true"
+           android:layout_width="110dp"
+           android:layout_height="110dp"/>
+
+       <View
+           android:layout_width="111dp"
+           android:layout_height="111dp"
+           android:background="@drawable/base_shape_circle"/>
+
+
+   </RelativeLayout>
+
+
+    <!--提示文本-->
+    <TextView
+        android:id="@+id/hintText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#fff"
+        android:textSize="14dp" />
+
+</LinearLayout>
