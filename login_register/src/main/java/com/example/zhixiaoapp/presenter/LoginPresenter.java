@@ -14,7 +14,7 @@ public class LoginPresenter extends MVPBasePresenter<LoginContract.IView>
 
     private static final String TAG = "LoginPresenter";
 
-//    private LoginModel mModel = new LoginModel();
+//    private LoginAndRegisterModel mModel = new LoginAndRegisterModel();
 
     private final int ON_RESULT = 0;
     private final int NET_ERROR = 1;//网络错误

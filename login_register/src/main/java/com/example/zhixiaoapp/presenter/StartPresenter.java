@@ -12,7 +12,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class StartPresenter extends MVPBasePresenter<StartContract.IView> implements StartContract.IPresenter {
 
-    /* private LoginModel mModel = new LoginModel();*/
+    /* private LoginAndRegisterModel mModel = new LoginAndRegisterModel();*/
 
     private final int ON_RESULT = 0;
     private final int END = 1;

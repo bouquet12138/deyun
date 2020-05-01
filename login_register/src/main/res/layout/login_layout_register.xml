@@ -33,7 +33,7 @@
 
 
         <com.example.common_view.editText.MyEditText
-            android:id="@+id/place_user"
+            android:id="@+id/vertex_user_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:hint="请输入安置者手机号"
@@ -41,6 +41,14 @@
             app:maxLength="20"></com.example.common_view.editText.MyEditText>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/vertex_user_name"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="安置者姓名："
+        />
 
     <LinearLayout style="@style/personInfoBackGroundStyle">
 

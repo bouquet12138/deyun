@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.common_lib.base.AppMvpBaseActivity;
@@ -18,7 +19,9 @@ public class RegisterActivity extends AppMvpBaseActivity implements View.OnClick
 
 
     private MyEditText mMyTelPhone;
-    private MyEditText mPlace_user;
+    private MyEditText mVertexUser;
+    private TextView mVertexUserName;
+
     private MyEditText mVerCode;
     private Button mGetVrCodeBt;
     private MyEditText mLoginPassword;
@@ -45,7 +48,9 @@ public class RegisterActivity extends AppMvpBaseActivity implements View.OnClick
 
     private void initView() {
         mMyTelPhone = findViewById(R.id.myTelPhone);
-        mPlace_user = findViewById(R.id.place_user);
+        mVertexUser = findViewById(R.id.vertex_user_phone);
+        mVertexUserName = findViewById(R.id.vertex_user_name);
+
         mVerCode = findViewById(R.id.verCode);
         mGetVrCodeBt = findViewById(R.id.getVrCodeBt);
         mLoginPassword = findViewById(R.id.loginPassword);
