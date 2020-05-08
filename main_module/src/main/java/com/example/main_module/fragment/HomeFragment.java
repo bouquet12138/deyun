@@ -112,7 +112,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), PromotionActivity.class));//启动推广activity
                 break;
             case R.id.member_register:
-                ARouter.getInstance().build(ARouterContract.LOGIN_REGISTER) //跳转到登陆页面
+                ARouter.getInstance().build(ARouterContract.LOGIN_REGISTER) //跳转到注册页面
                         .navigation();
                 break;
             case R.id.user_center:

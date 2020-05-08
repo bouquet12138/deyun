@@ -38,17 +38,17 @@
             android:layout_height="wrap_content"
             app:hint="请输入安置者手机号"
             app:inputType="number"
-            app:maxLength="20"></com.example.common_view.editText.MyEditText>
+            app:maxLength="11"></com.example.common_view.editText.MyEditText>
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/vertex_user_name"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="安置者姓名："
-        />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="安置者姓名：未知" />
 
     <LinearLayout style="@style/personInfoBackGroundStyle">
 
@@ -86,7 +86,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:inputType="textPassword"></com.example.common_view.editText.MyEditText>
+            app:hint="6-20位"
+            app:inputType="textPassword"
+            app:maxLength="20"></com.example.common_view.editText.MyEditText>
 
         <com.example.common_view.custom_view.ShowPasswordView
             android:id="@+id/passwordBt1"
@@ -108,6 +110,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            app:hint="6-20位"
+            app:maxLength="20"
             app:inputType="textPassword"></com.example.common_view.editText.MyEditText>
 
         <com.example.common_view.custom_view.ShowPasswordView
@@ -130,7 +134,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:inputType="textPassword"></com.example.common_view.editText.MyEditText>
+            app:hint="6位数字"
+            app:maxLength="6"
+            app:inputType="number_password"></com.example.common_view.editText.MyEditText>
 
         <com.example.common_view.custom_view.ShowPasswordView
             android:id="@+id/passwordBt3"
@@ -152,7 +158,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:inputType="textPassword"></com.example.common_view.editText.MyEditText>
+            app:maxLength="6"
+            app:hint="6位数字"
+            app:inputType="number_password"></com.example.common_view.editText.MyEditText>
 
         <com.example.common_view.custom_view.ShowPasswordView
             android:id="@+id/passwordBt4"

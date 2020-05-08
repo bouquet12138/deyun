@@ -3,12 +3,16 @@ package com.example.main_module.activity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.baselib.util.DensityUtil;
 import com.example.common_lib.base.AppMvpBaseActivity;
+import com.example.common_lib.bean.AppBean;
 import com.example.main_module.R;
+import com.example.main_module.contract.AppContract;
+import com.example.main_module.presenter.AppPresenter;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -21,9 +25,10 @@ import java.util.Map;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.WHITE;
 
-public class PromotionActivity extends AppMvpBaseActivity {
+public class PromotionActivity extends AppMvpBaseActivity implements AppContract.IView {
 
     private ImageView mAppImage;
+    private AppPresenter mPresenter = new AppPresenter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +37,8 @@ public class PromotionActivity extends AppMvpBaseActivity {
         mSmartRefreshLayout.setBackgroundColor(getResources().getColor(R.color.app_title_color));
         initView();
         setSubmitEnable(false);
-        Glide.with(this).load( getQrCode(DensityUtil.dipToPx(300),
-                DensityUtil.dipToPx(300), "http://app/a.jpg")).into(mAppImage);
+        mPresenter.attachView(this);//绑定一下view
+        mPresenter.getAppInfo();//得到
     }
 
     @Override
@@ -62,6 +67,7 @@ public class PromotionActivity extends AppMvpBaseActivity {
     }
 
     private void initView() {
+        mNetErrorView.setBackgroundColor(0xffffffff);
         mAppImage = findViewById(R.id.appImage);
     }
 
@@ -102,4 +108,13 @@ public class PromotionActivity extends AppMvpBaseActivity {
         return null;
     }
 
+    private static final String TAG = "PromotionActivity";
+    
+    @Override
+    public void setAppInfo(AppBean appBean) {
+        Log.d(TAG, "setAppInfo: " + appBean);
+        if (appBean != null && appBean.getApp_url() != null)
+            Glide.with(this).load(getQrCode(DensityUtil.dipToPx(300),
+                    DensityUtil.dipToPx(300), appBean.getApp_url())).into(mAppImage);
+    }
 }

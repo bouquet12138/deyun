@@ -23,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MVPBaseActivity extends AppCompatActivity implements IMVPBaseView, NetChangeObserver {
 
-
     private AppProgressBar appProgressBar;
 
     @Override

@@ -129,7 +129,7 @@ public class AccountManagerActivity extends AppMvpBaseActivity implements View.O
         if (i == R.id.backButton) {
             finish();//销毁
         } else if (i == R.id.modifyPass) { //修改密码
-            startActivity(new Intent(this, ModifyPasswordActivity.class));
+            startActivity(new Intent(this, ModifyLoginPasswordActivity.class));
         } else if (i == R.id.modifyPayPass) { //修改密码
             startActivity(new Intent(this, ModifyPayPasswordActivity.class));
         } else if (i == R.id.cleanCache) {//清理缓存

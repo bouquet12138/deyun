@@ -2,6 +2,7 @@ package com.example.common_view.editText;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -27,6 +28,9 @@ public class MyEditText extends LinearLayout {
     private Integer mInputType;
     private Integer mMaxLength;
 
+    public EditText getEditText() {
+        return editText;
+    }
 
     public MyEditText(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -42,22 +46,33 @@ public class MyEditText extends LinearLayout {
         initListener();
     }
 
+    /**
+     * 初始化view
+     */
     private void initView() {
-        rootView = inflate(getContext(), R.layout.layout_editor, this);
-        editText = rootView.findViewById(R.id.editText);//编辑文本
-        editText.setHint(mHintStr);//设置提醒文本
         if (mInputType == 1)
-            editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
-        else if (mInputType == 2) {
+            rootView = inflate(getContext(), R.layout.layout_editor_c, this);
+        else if (mInputType == 3)
+            rootView = inflate(getContext(), R.layout.layout_editor_b, this);
+        else
+            rootView = inflate(getContext(), R.layout.layout_editor, this);
+
+        editText = rootView.findViewById(R.id.editText);//编辑文本
+        deleteImage = rootView.findViewById(R.id.deleteBtn);//删除按钮
+
+        editText.setHint(mHintStr);//设置提醒文本
+       if (mInputType == 2) {
             editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         }
 
         if (mMaxLength != -1)
             editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mMaxLength)});
 
-        deleteImage = rootView.findViewById(R.id.deleteBtn);//删除按钮
     }
 
+    /**
+     * 初始化监听
+     */
     private void initListener() {
 
         deleteImage.setOnClickListener(v -> {
@@ -115,6 +130,15 @@ public class MyEditText extends LinearLayout {
     }
 
     /**
+     * 设置光标位置
+     *
+     * @param position
+     */
+    public void setCursorPosition(int position) {
+        editText.setSelection(position);
+    }
+
+    /**
      * 得到文本
      */
 
@@ -128,9 +152,19 @@ public class MyEditText extends LinearLayout {
         editText.setEnabled(enabled);
         deleteImage.setEnabled(enabled);
         if (enabled)
-            deleteImage.setImageAlpha(255);
-        else
-            deleteImage.setImageAlpha(127);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                deleteImage.setImageAlpha(255);
+            } else {
+                deleteImage.setAlpha(1);
+            }
+
+        else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                deleteImage.setImageAlpha(127);
+            } else {
+                deleteImage.setAlpha(0.5f);
+            }
+        }
     }
 
     public interface OnTextChangedListener {

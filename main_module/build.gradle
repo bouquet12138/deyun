@@ -64,5 +64,8 @@ dependencies {
 
     if (!isModule.toBoolean()) {
         implementation project(':login_register')
+        implementation project(':withdraw_module')
+        implementation project(':integral_module')
+        implementation project(':payroll_module')
     }
 }

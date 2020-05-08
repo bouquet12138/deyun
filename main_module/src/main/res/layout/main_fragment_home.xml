@@ -127,6 +127,7 @@
 
                 <!--我的店铺-->
                 <LinearLayout
+                    android:visibility="invisible"
                     android:id="@+id/myShop"
                     style="@style/main_home_bt">
 

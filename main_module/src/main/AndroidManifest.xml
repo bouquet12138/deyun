@@ -10,6 +10,7 @@
         android:roundIcon="@drawable/icon_circle"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.MyTeamActivity" />
         <activity android:name=".activity.MainStartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +24,10 @@
         <activity android:name=".activity.OptionActivity" />
         <activity android:name=".activity.AppUpdateActivity" />
         <activity android:name=".activity.ModifyPayPasswordActivity" />
-        <activity android:name=".activity.ModifyPasswordActivity" />
+        <activity android:name=".activity.ModifyLoginPasswordActivity" />
         <activity android:name=".activity.AccountManagerActivity" />
         <activity android:name=".activity.AboutUsActivity" />
-        <activity android:name=".activity.MainActivity">
-        </activity>
+        <activity android:name=".activity.MainActivity" />
     </application>
 
 </manifest>

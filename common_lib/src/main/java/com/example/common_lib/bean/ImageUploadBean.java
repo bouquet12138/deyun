@@ -7,17 +7,18 @@ public class ImageUploadBean implements Serializable {
     public ImageUploadBean() {
     }
 
-    public ImageUploadBean(String imageLocalUrl, boolean isUpload, String imageServerUrl) {
-        mImageLocalUrl = imageLocalUrl;
-        mIsUpload = isUpload;
-        mImageServerUrl = imageServerUrl;
-    }
 
     private String mImageLocalUrl;//图片本地地址
 
-    private boolean mIsUpload = false;//是否上传
+    private boolean mIsUpload = true;//默认是已经上传
 
-    private String mImageServerUrl;//图片服务器地址
+    private int mImageId;//图片服务器地址
+
+    public ImageUploadBean(String imageLocalUrl, boolean isUpload, int imageId) {
+        mImageLocalUrl = imageLocalUrl;
+        mIsUpload = isUpload;
+        mImageId = imageId;
+    }
 
     public String getImageLocalUrl() {
         return mImageLocalUrl;
@@ -35,13 +36,11 @@ public class ImageUploadBean implements Serializable {
         mIsUpload = upload;
     }
 
-    public String getImageServerUrl() {
-        return mImageServerUrl;
+    public int getImageId() {
+        return mImageId;
     }
 
-    public void setImageServerUrl(String imageServerUrl) {
-        mImageServerUrl = imageServerUrl;
+    public void setImageId(int imageId) {
+        mImageId = imageId;
     }
-
-
 }

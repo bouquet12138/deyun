@@ -11,9 +11,12 @@
             <option value="$PROJECT_DIR$/base_lib" />
             <option value="$PROJECT_DIR$/common_lib" />
             <option value="$PROJECT_DIR$/common_view" />
+            <option value="$PROJECT_DIR$/integral_module" />
             <option value="$PROJECT_DIR$/login_register" />
             <option value="$PROJECT_DIR$/main_module" />
+            <option value="$PROJECT_DIR$/payroll_module" />
             <option value="$PROJECT_DIR$/ui" />
+            <option value="$PROJECT_DIR$/withdraw_module" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

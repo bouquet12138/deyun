@@ -27,7 +27,7 @@ public class CityServicesActivity extends AppCompatActivity implements View.OnCl
     private SmartRefreshLayout mSmartRefresh;
     private RecyclerView mRecyclerView;
 
-    //申明对象
+    //城市选择器
     private CityPickerView mPicker = new CityPickerView();
 
     @Override
@@ -87,7 +87,7 @@ public class CityServicesActivity extends AppCompatActivity implements View.OnCl
                 .districtCyclic(false)//区县滚轮是否循环滚动
                 .setLineColor("#fafafa")//中间横线的颜色
                 .setLineHeigh(1)//中间横线的高度
-                .setCustomItemLayout(R.layout.main_item_city)
+                .setCustomItemLayout(R.layout.common_item_city)
                 .setCustomItemTextViewId(R.id.item_city_name_tv)
                 .build();
         mPicker.setConfig(cityConfig);
@@ -96,7 +96,7 @@ public class CityServicesActivity extends AppCompatActivity implements View.OnCl
         mPicker.setOnCityItemClickListener(new OnCityItemClickListener() {
             @Override
             public void onSelected(ProvinceBean province, CityBean city, DistrictBean district) {
-                mCityText.setText(province.getName()+"-"+city.getName()+"-" + district.getName());
+                mCityText.setText(province.getName() + "-" + city.getName() + "-" + district.getName());
             }
 
             @Override

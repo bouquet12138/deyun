@@ -1,7 +1,6 @@
 package com.example.common_lib.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -11,29 +10,18 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestFutureTarget;
 import com.example.baselib.adapter.MyFragmentAdapter;
 import com.example.baselib.base.MVPBaseActivity;
 import com.example.baselib.util.CollectionsUtil;
-import com.example.baselib.util.DensityUtil;
 import com.example.baselib.util.NetWorkUtils;
-import com.example.baselib.util.SaveImageUtil;
 import com.example.common_lib.R;
 import com.example.common_lib.fragment.PicFragment;
-import com.example.common_lib.info.AppInfo;
-import com.example.common_lib.info.NowUserInfo;
-import com.example.common_lib.info.ServerInfo;
-import com.qmuiteam.qmui.layout.QMUILinearLayout;
-import com.qmuiteam.qmui.widget.QMUIProgressBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.zhihu.matisse.internal.utils.Platform;
 

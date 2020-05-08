@@ -26,6 +26,7 @@ public class AppUpdateActivity extends AppMvpBaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         showNormalView();//展示正常view
         setSubmitEnable(false);//不展示提交按钮
+        mNetErrorView.setBackgroundColor(0xffffffff);
         initView();
         initData();
         initListener();

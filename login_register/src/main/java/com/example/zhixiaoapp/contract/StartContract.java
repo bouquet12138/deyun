@@ -13,8 +13,6 @@ public interface StartContract {
 
     interface IPresenter {
         void initInfo();
-
-        int getOccu();//得到身份
     }
 
 }

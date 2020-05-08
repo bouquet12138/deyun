@@ -23,7 +23,7 @@
 
 
         <com.qmuiteam.qmui.widget.QMUIRadiusImageView
-            android:id="@+id/studentHeadView"
+            android:id="@+id/headView"
             app:qmui_is_circle="true"
             app:qmui_border_color="#3888"
             app:qmui_border_width="0dp"
@@ -45,7 +45,7 @@
 
 
         <com.example.common_view.editText.MyEditText
-            android:id="@+id/studentName"
+            android:id="@+id/nameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:maxLength="20"></com.example.common_view.editText.MyEditText>

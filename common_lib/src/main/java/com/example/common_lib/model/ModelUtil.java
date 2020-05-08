@@ -15,6 +15,7 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+
 /**
  * 只能本包中访问
  */
@@ -24,6 +25,7 @@ class ModelUtil {
 
     static void postJsonBean(Object obj, String _address, OnGetInfoListener<BaseBean> listener) {
         String json = GsonUtil.GsonString(obj);
+        Log.d(TAG, "postJsonBean: " + json);
         postJson(json, _address, listener);
     }
 

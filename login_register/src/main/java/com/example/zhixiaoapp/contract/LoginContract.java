@@ -26,7 +26,7 @@ public interface LoginContract {
 
         void startMainActivity();//跳转到主界面
 
-        int getOccu();
+        void showPrivacy();//展示隐私政策
 
     }
 

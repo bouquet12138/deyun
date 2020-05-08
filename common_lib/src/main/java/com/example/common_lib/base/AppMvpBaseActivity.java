@@ -28,6 +28,7 @@ public abstract class AppMvpBaseActivity extends MVPBaseActivity implements IApp
 
     protected QMUIDialog mHintDialog;//提醒对话框
     private QMUITipDialog mErrorDialog;//错误dialog
+    private QMUITipDialog mSuccessDialog;//成功dialog
 
     protected ImageView mBackButton;//返回按钮
     protected SmartRefreshLayout mSmartRefreshLayout;
@@ -73,7 +74,10 @@ public abstract class AppMvpBaseActivity extends MVPBaseActivity implements IApp
                 .setTitle("正在编辑")
                 .setMessage("确定要退出吗？")
                 .addAction("取消", (dialog, index) -> dialog.dismiss())
-                .addAction(0, "确定", QMUIDialogAction.ACTION_PROP_NEGATIVE, (dialog, index) -> dialog.dismiss()).
+                .addAction(0, "确定", QMUIDialogAction.ACTION_PROP_NEGATIVE, (dialog, index) -> {
+                    dialog.dismiss();
+                    finishActivity();//销毁Activity
+                }).
                         create();
 
         mRootView = findViewById(R.id.rootView);
@@ -124,6 +128,7 @@ public abstract class AppMvpBaseActivity extends MVPBaseActivity implements IApp
 
     /**
      * 展示错误信息
+     *
      * @param hintStr
      */
     @Override
@@ -133,7 +138,22 @@ public abstract class AppMvpBaseActivity extends MVPBaseActivity implements IApp
                 .setTipWord(hintStr)
                 .create();
         mErrorDialog.show();//展示一下
-        mBackButton.postDelayed(() -> mErrorDialog.dismiss(), 2000);
+        mBackButton.postDelayed(() -> mErrorDialog.dismiss(), 1000);
+    }
+
+    /**
+     * 展示成功信息
+     *
+     * @param hintStr
+     */
+    @Override
+    public void showSuccessHint(String hintStr) {
+        mSuccessDialog = new QMUITipDialog.Builder(getContext())
+                .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
+                .setTipWord(hintStr)
+                .create();
+        mSuccessDialog.show();//展示一下
+        mBackButton.postDelayed(() -> mSuccessDialog.dismiss(), 1000);
     }
 
     /**
@@ -153,7 +173,8 @@ public abstract class AppMvpBaseActivity extends MVPBaseActivity implements IApp
     public void setSubmitEnable(boolean enable) {
         mRightText.setEnabled(enable);
         if (enable) {
-            mFloatBt.show();
+            mFloatBt.hide();
+            //  mFloatBt.show();
         } else {
             mFloatBt.hide();
         }
@@ -205,7 +226,8 @@ public abstract class AppMvpBaseActivity extends MVPBaseActivity implements IApp
             mFloatBt.hide();//提交按钮不可见
         } else {
             mRightText.setVisibility(View.VISIBLE);//不可见
-            mFloatBt.show();//展示
+            mFloatBt.hide();//提交按钮不可见
+            // mFloatBt.show();//展示
         }
     }
 

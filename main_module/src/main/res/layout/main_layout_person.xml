@@ -14,8 +14,7 @@
 
         <ImageView
             style="@style/main_person_image"
-            android:src="@drawable/main_my_team"
-           />
+            android:src="@drawable/main_my_team" />
 
         <TextView
             style="@style/main_person_line_text"
@@ -29,13 +28,12 @@
     <!--可领奖励-->
     <LinearLayout
         android:id="@+id/can_get"
-        android:visibility="gone"
-        style="@style/main_person_line_layout">
+        style="@style/main_person_line_layout"
+        android:visibility="gone">
 
         <ImageView
-            android:src="@drawable/main_can_get"
             style="@style/main_person_image"
-          />
+            android:src="@drawable/main_can_get" />
 
         <TextView
             style="@style/main_person_line_text"
@@ -45,7 +43,7 @@
     </LinearLayout>
 
     <!--一根线-->
-   <!-- <View style="@style/main_divider" />-->
+    <!-- <View style="@style/main_divider" />-->
 
     <!--提现记录-->
     <LinearLayout
@@ -54,12 +52,30 @@
 
         <ImageView
             style="@style/main_person_image"
-            android:src="@drawable/main_with_draw"
-            android:padding="1dp" />
+            android:padding="1dp"
+            android:src="@drawable/main_with_draw" />
 
         <TextView
             style="@style/main_person_line_text"
             android:text="提现记录" />
+
+
+    </LinearLayout>
+    <!--一根线-->
+    <View style="@style/main_divider" />
+
+    <!--充值记录-->
+    <LinearLayout
+        android:id="@+id/rechargeRecord"
+        style="@style/main_person_line_layout">
+
+        <ImageView
+            style="@style/main_person_image"
+            android:src="@drawable/main_team_returns" />
+
+        <TextView
+            style="@style/main_person_line_text"
+            android:text="充值记录" />
 
 
     </LinearLayout>
@@ -70,46 +86,45 @@
         android:layout_height="10dp"
         android:background="@color/app_back_color" />
 
-    <!--团队收益-->
+    <!--推广收益-->
     <LinearLayout
-        android:id="@+id/teamReturns"
+        android:id="@+id/promoteIncome"
+        android:visibility="gone"
         style="@style/main_person_line_layout">
 
         <ImageView
             style="@style/main_person_image"
-           android:src="@drawable/main_team_returns"
-            />
+            android:src="@drawable/main_team_returns" />
 
         <TextView
             style="@style/main_person_line_text"
-            android:text="团队收益" />
+            android:text="推广收益" />
 
 
     </LinearLayout>
 
-
     <!--一根线-->
-    <View style="@style/main_divider" />
+    <View style="@style/main_divider" android:visibility="gone" />
 
     <!--互转积分记录-->
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/transferRecord"
         style="@style/main_person_line_layout">
 
         <ImageView
             style="@style/main_person_image"
             android:padding="2dp"
-            android:src="@drawable/main_transfer_record"
-            />
+            android:src="@drawable/main_transfer_record" />
 
         <TextView
             style="@style/main_person_line_text"
-            android:text="互转积分记录" />
+            android:text="互转工资记录" />
 
     </LinearLayout>
 
     <!--一根线-->
-    <View style="@style/main_divider" />
+    <View style="@style/main_divider" android:visibility="gone"/>
 
     <!--推广记录-->
     <LinearLayout
@@ -117,15 +132,14 @@
         style="@style/main_person_line_layout">
 
         <ImageView
-            android:src="@drawable/main_promotion_record"
-            style="@style/main_person_image" />
+            style="@style/main_person_image"
+            android:src="@drawable/main_promotion_record" />
 
         <TextView
             style="@style/main_person_line_text"
             android:text="推广记录" />
 
     </LinearLayout>
-
 
 
     <View

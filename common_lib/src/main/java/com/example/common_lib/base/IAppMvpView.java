@@ -16,5 +16,7 @@ public interface IAppMvpView extends IMVPBaseView {
     void completeRefresh();//完成刷新
 
     void showErrorHint(String hintStr);//展示错误信息
+
+    void showSuccessHint(String hintStr);//展示成功信息
 }
 

@@ -12,16 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="40dp">
 
-        <EditText
+        <com.example.common_view.editText.MyEditText
             android:id="@+id/accountEdit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/app_selector_input"
             android:gravity="center_vertical"
-            android:hint="请输入账号"
             android:maxLines="1"
             android:paddingLeft="40dp"
-            android:textColor="#666" />
+            android:textColor="#666"
+            app:hint="请输入账号(手机号)" />
 
         <ImageView
             android:layout_width="40dp"
@@ -36,16 +36,17 @@
         android:layout_height="40dp"
         android:layout_marginTop="20dp">
 
-        <EditText
+        <com.example.common_view.editText.MyEditText
             android:id="@+id/passwordEdit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/app_selector_input"
             android:gravity="center_vertical"
-            android:hint="请输入密码"
-            android:inputType="textPassword"
+            app:inputType="textPassword"
             android:paddingLeft="40dp"
-            android:textColor="#666" />
+            android:paddingRight="40dp"
+            android:textColor="#666"
+            app:hint="请输入密码" />
 
         <ImageView
             android:layout_width="40dp"
@@ -53,14 +54,11 @@
             android:padding="10dp"
             android:src="@drawable/app_password" />
 
-        <ImageView
+        <com.example.common_view.custom_view.ShowPasswordView
             android:id="@+id/openImage"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:paddingLeft="10dp"
-            android:paddingRight="5dp"
-            android:src="@drawable/close" />
+            android:layout_alignParentRight="true" />
 
     </RelativeLayout>
 
@@ -87,9 +85,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/forgetPassword"
@@ -113,8 +111,8 @@
         android:enabled="false"
         android:text="登&#12288;&#12288;陆"
         android:textColor="#fff"
-        app:qmui_borderWidth="0dp"
         app:qmui_backgroundColor="@drawable/selector_bt_color"
+        app:qmui_borderWidth="0dp"
         app:qmui_isRadiusAdjustBounds="true" />
 
 </LinearLayout>
