@@ -12,6 +12,7 @@ import com.example.common_lib.base.AppMvpBaseActivity;
 import com.example.common_lib.info.NowUserInfo;
 import com.example.common_lib.contract.ARouterContract;
 import com.example.common_lib.java_bean.UserBean;
+import com.example.common_lib.model.SMSModel;
 import com.example.common_view.custom_view.ShowPasswordView;
 import com.example.common_view.editText.MyEditText;
 import com.example.zhixiaoapp.R;
@@ -39,6 +40,8 @@ public class RegisterActivity extends AppMvpBaseActivity implements View.OnClick
     private ShowPasswordView mPasswordBt3;
     private MyEditText mConfirmPayPassword;
     private ShowPasswordView mPasswordBt4;
+
+    private SMSModel mSMSModel = new SMSModel();
 
     private RegisterPresenter mPresenter = new RegisterPresenter();
 
@@ -188,7 +191,6 @@ public class RegisterActivity extends AppMvpBaseActivity implements View.OnClick
 
         String phoneNum = mMyTelPhone.getText();
         String vertexPhoneNum = mVertexUser.getText();
-        String verCode = mVerCode.getText();
 
         String loginPass = mLoginPassword.getText();
         String confirmLoginPass = mConfirmLoginPassword.getText();
@@ -202,10 +204,6 @@ public class RegisterActivity extends AppMvpBaseActivity implements View.OnClick
         }
         if (TextUtils.isEmpty(vertexPhoneNum) || vertexPhoneNum.length() < 11) {
             showErrorHint("请输入正确安置者手机号");
-            return false;
-        }
-        if (TextUtils.isEmpty(verCode) || !verCode.equals(mPresenter.getQrCode())) {
-            showErrorHint("请输入正确的验证码");
             return false;
         }
         if (TextUtils.isEmpty(loginPass) || TextUtils.isEmpty(confirmLoginPass)
@@ -252,6 +250,26 @@ public class RegisterActivity extends AppMvpBaseActivity implements View.OnClick
         Log.d(TAG, "registerSuccess: " + userId);
         finish();//销毁Activity
         InformationActivity.actionStart(this, userId);
+    }
+
+    /**
+     * 得到手机号
+     *
+     * @return
+     */
+    @Override
+    public String getPhoneNum() {
+        return mMyTelPhone.getText();
+    }
+
+    /**
+     * 得到验证码
+     *
+     * @return
+     */
+    @Override
+    public String getVerCode() {
+        return mVerCode.getText();
     }
 
 

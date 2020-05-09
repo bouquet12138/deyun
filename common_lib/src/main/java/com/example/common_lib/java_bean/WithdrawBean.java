@@ -1,11 +1,12 @@
 package com.example.common_lib.java_bean;
 
 public class WithdrawBean {
+
     private Integer withdraw_id;
     private Integer withdraw_amount;
     private String withdraw_time;
     private Integer user_id;
-    private Integer integral_id;
+    private Integer payroll_id;
     private String withdraw_remark;
     private String bank_card;
     private String alipay;
@@ -18,14 +19,11 @@ public class WithdrawBean {
     private String handle_time;//处理时间
 
     public WithdrawBean(Integer user_id, Integer withdraw_amount, String pay_password,
-                        String withdraw_remark, String bank_card,
-                        String alipay, String wechat) {
+                        String withdraw_remark) {
         this.withdraw_amount = withdraw_amount;
         this.user_id = user_id;
         this.withdraw_remark = withdraw_remark;
-        this.bank_card = bank_card;
-        this.alipay = alipay;
-        this.wechat = wechat;
+
         this.pay_password = pay_password;
     }
 
@@ -34,14 +32,17 @@ public class WithdrawBean {
         return "WithdrawBean{" +
                 "withdraw_id=" + withdraw_id +
                 ", withdraw_amount=" + withdraw_amount +
-                ", withdraw_time=" + withdraw_time +
+                ", withdraw_time='" + withdraw_time + '\'' +
                 ", user_id=" + user_id +
-                ", integral_id=" + integral_id +
+                ", payroll_id=" + payroll_id +
                 ", withdraw_remark='" + withdraw_remark + '\'' +
                 ", bank_card='" + bank_card + '\'' +
                 ", alipay='" + alipay + '\'' +
                 ", wechat='" + wechat + '\'' +
                 ", remain_record=" + remain_record +
+                ", pay_password='" + pay_password + '\'' +
+                ", is_process=" + is_process +
+                ", handle_time='" + handle_time + '\'' +
                 '}';
     }
 
@@ -77,12 +78,12 @@ public class WithdrawBean {
         this.user_id = user_id;
     }
 
-    public Integer getIntegral_id() {
-        return integral_id;
+    public Integer getPayroll_id() {
+        return payroll_id;
     }
 
-    public void setIntegral_id(Integer integral_id) {
-        this.integral_id = integral_id;
+    public void setPayroll_id(Integer payroll_id) {
+        this.payroll_id = payroll_id;
     }
 
     public String getWithdraw_remark() {

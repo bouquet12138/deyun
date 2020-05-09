@@ -77,6 +77,7 @@
             android:id="@+id/targetUserText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:maxLength="11"
             app:hint="目标用户手机号"></com.example.common_view.editText.MyEditText>
 
     </LinearLayout>

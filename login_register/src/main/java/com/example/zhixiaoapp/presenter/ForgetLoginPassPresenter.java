@@ -7,16 +7,22 @@ import android.text.TextUtils;
 import com.example.baselib.base.MVPBasePresenter;
 import com.example.baselib.listener.OnGetInfoListener;
 import com.example.baselib.util.NetWorkUtils;
+import com.example.common_lib.bean.SMSBean;
 import com.example.common_lib.java_bean.BaseBean;
 import com.example.common_lib.java_bean.UserBean;
 import com.example.common_lib.model.LoginAndRegisterModel;
+import com.example.common_lib.model.SMSModel;
 import com.example.common_lib.model.UserModel;
 import com.example.zhixiaoapp.contract.ForgetLoginContract;
+
+import java.util.Random;
 
 public class ForgetLoginPassPresenter extends MVPBasePresenter<ForgetLoginContract.IView>
         implements ForgetLoginContract.IPresenter {
 
     private LoginAndRegisterModel mModel = new LoginAndRegisterModel();//登陆和注册model
+    private SMSModel mSMSModel = new SMSModel();
+
     private UserModel mUserModel = new UserModel();
 
     private int mCountNum;
@@ -35,7 +41,8 @@ public class ForgetLoginPassPresenter extends MVPBasePresenter<ForgetLoginContra
     private final int SUBMIT_NET_ERROR = 8;//网络错误
     private final int SUBMIT_ON_COMPLETE = 9;//完成
 
-    private String mVerCode = "1234";//验证码
+    private String mVerCode = "";//验证码
+    private String mMobile;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -43,6 +50,21 @@ public class ForgetLoginPassPresenter extends MVPBasePresenter<ForgetLoginContra
             if (!isViewAttached())//没有视图绑定直接返回
                 return;
             switch (msg.what) {
+                case QR_SUCCESS:
+                    SMSBean smsBean = (SMSBean) msg.obj;
+                    if (smsBean.getError_code() == 0) {
+                        getView().showSuccessHint("验证码发送成功");
+                    } else {
+                        getView().showErrorHint(smsBean.getReason());
+                        mVerCode = "";
+                    }
+                    break;
+                case QR_NET_ERROR:
+                    getView().showErrorHint("网络错误");
+                    mVerCode = "";
+                    break;
+                case QR_ON_COMPLETE:
+                    break;
                 case QR_COUNT:
                     if (mCountNum <= 0) {
                         getView().setSendBtEnable(true);//发送验证码的按钮可用
@@ -91,7 +113,7 @@ public class ForgetLoginPassPresenter extends MVPBasePresenter<ForgetLoginContra
      */
     private void submitPassword(int user_id) {
 
-        if (getView().isForgetPay()){//忘记支付密码
+        if (getView().isForgetPay()) {//忘记支付密码
             mModel.modify_pay_password(user_id, getView().getLoginPassword(), new OnGetInfoListener<BaseBean>() {
                 @Override
                 public void onComplete() {
@@ -111,7 +133,7 @@ public class ForgetLoginPassPresenter extends MVPBasePresenter<ForgetLoginContra
                     mHandler.sendMessage(msg);//发送信息
                 }
             });
-        }else{
+        } else {
             mModel.modify_login_password(user_id, getView().getLoginPassword(), new OnGetInfoListener<BaseBean>() {
                 @Override
                 public void onComplete() {
@@ -141,9 +163,47 @@ public class ForgetLoginPassPresenter extends MVPBasePresenter<ForgetLoginContra
      */
     @Override
     public void sendQrCode() {
+        if (!isViewAttached())//没有视图绑定,直接返回
+            return;
+        mMobile = getView().getPhoneNum();//手机号
+
+        if (TextUtils.isEmpty(mMobile) || mMobile.length() != 11) {
+            getView().showErrorHint("请输入正确的手机号");
+            return;
+        }
+        if (!NetWorkUtils.isNetWorkAvailable()) {
+            getView().showErrorHint("网络错误");
+            return;
+        }
         mCountNum = 60;
         getView().setSendBtEnable(false);//发送按钮不可用
         mHandler.sendEmptyMessage(QR_COUNT);//计数
+        Random random = new Random();
+
+        mVerCode = "";
+        for (int i = 0; i < 6; i++) {
+            mVerCode += random.nextInt(10);
+        }
+
+        mSMSModel.sendQrCode(mMobile, mVerCode, new OnGetInfoListener<SMSBean>() {
+            @Override
+            public void onComplete() {
+                mHandler.sendEmptyMessage(QR_ON_COMPLETE);
+            }
+
+            @Override
+            public void onNetError() {
+                mHandler.sendEmptyMessage(QR_NET_ERROR);
+            }
+
+            @Override
+            public void onResult(SMSBean info) {
+                Message msg = mHandler.obtainMessage();
+                msg.what = QR_SUCCESS;//结果
+                msg.obj = info;
+                mHandler.sendMessage(msg);//发送信息
+            }
+        });
     }
 
     @Override
@@ -159,7 +219,9 @@ public class ForgetLoginPassPresenter extends MVPBasePresenter<ForgetLoginContra
             return;
         }
 
-        if (!mVerCode.equals(getView().getVerCode())) {//如果验证码不相同
+        String mobile = getView().getPhoneNum();
+
+        if (!mVerCode.equals(getView().getVerCode()) || !mobile.equals(mMobile)) {//如果验证码不相同
             getView().showErrorHint("请输入正确的验证码");
             return;
         }
@@ -185,4 +247,6 @@ public class ForgetLoginPassPresenter extends MVPBasePresenter<ForgetLoginContra
             }
         });
     }
+
+
 }

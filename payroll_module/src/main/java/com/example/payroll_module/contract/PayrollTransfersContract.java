@@ -53,7 +53,7 @@ public interface PayrollTransfersContract {
         /**
          * 转账
          */
-        void integralTransfers();
+        void payrollTransfers();
 
         /**
          * 得到用户信息

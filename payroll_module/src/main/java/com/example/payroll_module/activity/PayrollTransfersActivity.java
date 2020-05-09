@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.utils.TextUtils;
 import com.example.common_lib.base.AppMvpBaseActivity;
+import com.example.common_lib.contract.ARouterContract;
 import com.example.common_lib.info.NowUserInfo;
 import com.example.common_lib.java_bean.UserBean;
 import com.example.common_view.custom_view.ShowPasswordView;
@@ -19,8 +23,8 @@ import com.example.payroll_module.R;
 import com.example.payroll_module.contract.PayrollTransfersContract;
 import com.example.payroll_module.presenter.PayrollTransfersPresenter;
 
-
-public class PayrollTransfersActivity extends AppMvpBaseActivity  implements PayrollTransfersContract.IView {
+@Route(path = ARouterContract.PAYROLL_TRANSFERS)
+public class PayrollTransfersActivity extends AppMvpBaseActivity implements PayrollTransfersContract.IView {
 
     private PayrollTransfersPresenter mPresenter = new PayrollTransfersPresenter();
 
@@ -30,6 +34,8 @@ public class PayrollTransfersActivity extends AppMvpBaseActivity  implements Pay
     private MyEditText mRemark;
     private MyEditText mTargetUserText;
     private TextView mUserNameText;
+
+    private Button mConfirmBt;//确认按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,7 @@ public class PayrollTransfersActivity extends AppMvpBaseActivity  implements Pay
         mTargetUserText = findViewById(R.id.targetUserText);
         mUserNameText = findViewById(R.id.userNameText);
 
+        mConfirmBt = findViewById(R.id.confirmBt);//确认按钮
         mPasswordBt.setEditText(mPassword);
     }
 
@@ -59,8 +66,13 @@ public class PayrollTransfersActivity extends AppMvpBaseActivity  implements Pay
      * 初始化监听
      */
     private void initListener() {
+
+        mConfirmBt.setOnClickListener(view -> {
+            onFloatBtClick();//提交
+        });
+
         mAmountNum.setOnTextChangedListener(() -> {
-            setSubmitEnable(isRight());//提交是否可用
+            mConfirmBt.setEnabled(isRight());//提交是否可用
         });
         mPassword.addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,11 +87,11 @@ public class PayrollTransfersActivity extends AppMvpBaseActivity  implements Pay
 
             @Override
             public void afterTextChanged(Editable editable) {
-                setSubmitEnable(isRight());//提交是否可用
+                mConfirmBt.setEnabled(isRight());//提交是否可用
             }
         });
         mTargetUserText.setOnTextChangedListener(() -> {
-            setSubmitEnable(isRight());//提交是否可用
+            mConfirmBt.setEnabled(isRight());//提交是否可用
             String targetUser = mTargetUserText.getText();
             if (!TextUtils.isEmpty(targetUser) && targetUser.length() == 11) {
                 mPresenter.getUserInfo(targetUser);//获取用户信息
@@ -90,12 +102,12 @@ public class PayrollTransfersActivity extends AppMvpBaseActivity  implements Pay
 
     @Override
     protected String getTitleName() {
-        return "积分互转";
+        return "工资互转";
     }
 
     @Override
     protected String getRightTextName() {
-        return "转账";
+        return "";
     }
 
     @Override
@@ -115,9 +127,7 @@ public class PayrollTransfersActivity extends AppMvpBaseActivity  implements Pay
             showErrorHint("不能给自己转账");
             return;
         }
-
-        mPresenter.integralTransfers();//开始转账
-
+        mPresenter.payrollTransfers();//开始转账
     }
 
     /**

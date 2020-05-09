@@ -82,7 +82,7 @@ public class WithDrawRecordActivity extends AppMvpBaseActivity implements Withdr
 
     @Override
     protected String getRightTextName() {
-        return "提现";
+        return "";
     }
 
     @Override

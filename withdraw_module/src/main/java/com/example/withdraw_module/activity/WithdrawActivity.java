@@ -5,10 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.utils.TextUtils;
 import com.example.common_lib.base.AppMvpBaseActivity;
+import com.example.common_lib.contract.ARouterContract;
 import com.example.common_lib.info.NowUserInfo;
 import com.example.common_lib.java_bean.UserBean;
 import com.example.common_lib.java_bean.WithdrawBean;
@@ -18,18 +25,26 @@ import com.example.withdraw_module.R;
 import com.example.withdraw_module.contract.WithdrawContract;
 import com.example.withdraw_module.presenter.WithdrawPresenter;
 
+@Route(path = ARouterContract.WITHDRAW_WITHDRAW)
 public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawContract.IView {
 
     private MyEditText mAmountNum;//提现金额
-    private EditText mPassword;
+    private MyEditText mPassword;
     private MyEditText mRemark;
-    private MyEditText mBandCardText;
-    private MyEditText mAlipayText;
-    private MyEditText mWechatText;
+
 
     private ShowPasswordView mPasswordView;//密码view
 
     private WithdrawPresenter mPresenter = new WithdrawPresenter();
+
+    private RadioButton mBandCard;
+    private RadioButton mAlipay;
+    private RadioButton mWechat;
+
+    private TextView mAccountTypeText;
+
+    private MyEditText mAccountText;
+    private Button mConfirmBt;//确认按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +65,15 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
         mPassword = findViewById(R.id.password);
         mPasswordView = findViewById(R.id.passwordBt);//密码按钮
         mRemark = findViewById(R.id.remark);
-        mBandCardText = findViewById(R.id.bandCardText);
-        mAlipayText = findViewById(R.id.alipayText);
-        mWechatText = findViewById(R.id.wechatText);
 
-        mPasswordView.setEditText(mPassword);//设置edit
+        mBandCard = findViewById(R.id.bandCard);
+        mAlipay = findViewById(R.id.alipay);
+        mWechat = findViewById(R.id.wechat);
+        mAccountTypeText = findViewById(R.id.accountTypeText);
+        mAccountText = findViewById(R.id.accountText);
+        mConfirmBt = findViewById(R.id.confirmBt);//确认按钮
+
+        mPasswordView.setEditText(mPassword.getEditText());//设置edit
     }
 
     /**
@@ -67,9 +86,10 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
             return;
 
         mRemark.setText("提现");
-        mBandCardText.setText(userBean.getBank_card());//银行卡号
+        mAccountText.setText(userBean.getBank_card());//自动输入
+      /*  mBandCardText.setText(userBean.getBank_card());//银行卡号
         mAlipayText.setText(userBean.getPhone_num());//支付宝号
-        mWechatText.setText(userBean.getPhone_num());//微信号
+        mWechatText.setText(userBean.getPhone_num());//微信号*/
 
     }
 
@@ -78,28 +98,41 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
      */
     private void initListener() {
         MyEditText.OnTextChangedListener onTextChangedListener = () -> {
-            setSubmitEnable(isRight());//提交是否可用
+            mConfirmBt.setEnabled(isRight());//提交是否可用
         };
+        mAccountText.setOnTextChangedListener(onTextChangedListener);
         mAmountNum.setOnTextChangedListener(onTextChangedListener);
-        mBandCardText.setOnTextChangedListener(onTextChangedListener);
+        mPassword.setOnTextChangedListener(onTextChangedListener);//密码改变
+      /*  mBandCardText.setOnTextChangedListener(onTextChangedListener);
         mAlipayText.setOnTextChangedListener(onTextChangedListener);
-        mWechatText.setOnTextChangedListener(onTextChangedListener);
-        mPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        mWechatText.setOnTextChangedListener(onTextChangedListener);*/
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                setSubmitEnable(isRight());//提交是否可用
+        mAlipay.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                mAccountTypeText.setText("支付宝号:");
+                mAccountText.setText(NowUserInfo.getNowUserPhone());
+                mAccountText.setCursorPosition();
             }
         });
+
+        mWechat.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                mAccountTypeText.setText("微信号:\u3000");
+                mAccountText.setText(NowUserInfo.getNowUserPhone());
+                mAccountText.setCursorPosition();
+            }
+        });
+
+        mBandCard.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b) {
+                mAccountTypeText.setText("银行卡号:");
+                mAccountText.setText(NowUserInfo.getNowUserInfo().getBank_card());//设置银行卡号
+                mAccountText.setCursorPosition();
+            }
+        });
+
+        mConfirmBt.setOnClickListener(view -> onFloatBtClick());//确认
+
     }
 
     /**
@@ -116,13 +149,14 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
         } catch (NumberFormatException e) {
         }
 
-        String password = mPassword.getText().toString();//密码
+        String password = mPassword.getText();//密码
 
-        String bandCard = mBandCardText.getText();
+        String account = mAccountText.getText();
+
+      /*  String bandCard = mBandCardText.getText();
         String alipay = mAlipayText.getText();
-        String wechat = mWechatText.getText();
-        if (amount != 0 && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(bandCard)
-                && !TextUtils.isEmpty(alipay) && !TextUtils.isEmpty(wechat))
+        String wechat = mWechatText.getText();*/
+        if (amount != 0 && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(account) && amount >= 100 && amount % 100 == 0)
             return true;
         return false;
     }
@@ -134,7 +168,7 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
 
     @Override
     protected String getRightTextName() {
-        return "提现";
+        return "";
     }
 
     @Override
@@ -163,12 +197,16 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
 
         String password = mPassword.getText().toString();//密码
         String remark = mRemark.getText();
-        String bandCard = mBandCardText.getText();
-        String alipay = mAlipayText.getText();
-        String wechat = mWechatText.getText();
 
-        WithdrawBean withdrawBean = new WithdrawBean(userBean.getUser_id(), amount, password, remark,
-                bandCard, alipay, wechat);
+        WithdrawBean withdrawBean = new WithdrawBean(userBean.getUser_id(), amount, password, remark);
+
+        if (mBandCard.isChecked())
+            withdrawBean.setBank_card(mAccountText.getText());
+        else if (mAlipay.isChecked())
+            withdrawBean.setAlipay(mAccountText.getText());
+        else if (mWechat.isChecked())
+            withdrawBean.setWechat(mAccountText.getText());
+
         mPresenter.withdrawInfo(withdrawBean);//提现
     }
 

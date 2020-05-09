@@ -48,7 +48,7 @@ public class PersonPresenter extends MVPBasePresenter<PersonContract.IView>
                     break;
                 case INTEGRAL_COMPLETE:
                     break;
-                case WITHDRAW_SUCCESS:
+                case PAYROLL_SUCCESS:
                     BaseBean<Integer> baseBean1 = (BaseBean) msg.obj;
                     // getView().showToast(baseBean.getMsg());//展示提示信息
                     if (baseBean1.getCode() == 1) {
@@ -57,10 +57,10 @@ public class PersonPresenter extends MVPBasePresenter<PersonContract.IView>
                         getView().showToast(baseBean1.getMsg());//提示信息
                     }
                     break;
-                case WITHDRAW_NET_ERROR:
+                case PAYROLL_NET_ERROR:
                     getView().showToast("网络错误，提现信息获取失败");//提示信息
                     break;
-                case WITHDRAW_COMPLETE:
+                case PAYROLL_COMPLETE:
                     break;
             }
         }
@@ -105,21 +105,21 @@ public class PersonPresenter extends MVPBasePresenter<PersonContract.IView>
         if (userBean == null)
             return;
 
-        mPayrollModel.total_payroll_record(userBean.getUser_id(), new OnGetInfoListener<BaseBean<Integer>>() {
+        mPayrollModel.total_payroll(userBean.getUser_id(), new OnGetInfoListener<BaseBean<Integer>>() {
             @Override
             public void onComplete() {
-                mHandler.sendEmptyMessage(WITHDRAW_COMPLETE);
+                mHandler.sendEmptyMessage(PAYROLL_COMPLETE);
             }
 
             @Override
             public void onNetError() {
-                mHandler.sendEmptyMessage(WITHDRAW_NET_ERROR);
+                mHandler.sendEmptyMessage(PAYROLL_NET_ERROR);
             }
 
             @Override
             public void onResult(BaseBean<Integer> info) {
                 Message msg = mHandler.obtainMessage();
-                msg.what = WITHDRAW_SUCCESS;
+                msg.what = PAYROLL_SUCCESS;
                 msg.obj = info;
                 mHandler.sendMessage(msg);//发送信息
             }

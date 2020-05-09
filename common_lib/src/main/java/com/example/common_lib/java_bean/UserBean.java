@@ -37,6 +37,9 @@ public class UserBean implements Serializable {
     private int is_merchant;
     private ImageBean head_img;
 
+    private long integral_num;//积分数
+    private long withdraw_num;//提现数
+    private long payroll_num;//工资数
 
     public int getUser_id() {
         return user_id;

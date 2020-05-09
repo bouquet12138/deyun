@@ -61,7 +61,7 @@ public class MyEditText extends LinearLayout {
         deleteImage = rootView.findViewById(R.id.deleteBtn);//删除按钮
 
         editText.setHint(mHintStr);//设置提醒文本
-       if (mInputType == 2) {
+        if (mInputType == 2) {
             editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         }
 
@@ -136,6 +136,17 @@ public class MyEditText extends LinearLayout {
      */
     public void setCursorPosition(int position) {
         editText.setSelection(position);
+    }
+
+    /**
+     * 设置光标位置
+     */
+    public void setCursorPosition() {
+        String str = editText.getText().toString();
+        if (TextUtils.isEmpty(str))
+            editText.setSelection(0);
+        else
+            editText.setSelection(str.length());
     }
 
     /**

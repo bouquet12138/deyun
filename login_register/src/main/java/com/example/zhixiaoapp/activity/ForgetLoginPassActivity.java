@@ -102,7 +102,11 @@ public class ForgetLoginPassActivity extends AppMvpBaseActivity implements View.
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.getVrCodeBt) {
-            mPresenter.sendQrCode();//发送验证码
+            String phoneNum = mMyTelPhone.getText();
+            if (phoneNum.length() == 11)
+                mPresenter.sendQrCode();//发送验证码
+            else
+                showErrorHint("请输入正确的手机号");
         }
     }
 

@@ -70,7 +70,7 @@ public class PayrollModel {
      * @param payrollBean
      * @param listener
      */
-    public void integral_rotation(PayrollBean payrollBean, OnGetInfoListener<BaseBean> listener) {
+    public void payroll_rotation(PayrollBean payrollBean, OnGetInfoListener<BaseBean> listener) {
         ModelUtil.postJsonBean(payrollBean, "payroll_rotation", listener);
     }
 

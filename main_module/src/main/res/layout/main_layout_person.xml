@@ -108,8 +108,7 @@
 
     <!--互转积分记录-->
     <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/transferRecord"
+        android:id="@+id/transfer"
         style="@style/main_person_line_layout">
 
         <ImageView
@@ -119,12 +118,12 @@
 
         <TextView
             style="@style/main_person_line_text"
-            android:text="互转工资记录" />
+            android:text="工资互转" />
 
     </LinearLayout>
 
     <!--一根线-->
-    <View style="@style/main_divider" android:visibility="gone"/>
+    <View style="@style/main_divider" />
 
     <!--推广记录-->
     <LinearLayout

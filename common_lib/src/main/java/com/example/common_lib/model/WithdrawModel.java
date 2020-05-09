@@ -110,6 +110,7 @@ public class WithdrawModel {
      * 提现
      */
     public void withdraw(WithdrawBean withdrawBean, OnGetInfoListener<BaseBean> listener) {
+
         ModelUtil.postJsonBean(withdrawBean, "withdraw", listener);
     }
 

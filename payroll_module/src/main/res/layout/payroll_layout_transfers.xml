@@ -12,7 +12,7 @@
             style="@style/personalInfoTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="积分数额:&#12288;" />
+            android:text="工资数额:&#12288;" />
 
         <!--提现金额-->
         <com.example.common_view.editText.MyEditText
@@ -83,9 +83,25 @@
 
     <!--用户姓名-->
     <TextView
-        android:layout_margin="10dp"
         android:id="@+id/userNameText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" />
+
+    <!--确定按钮-->
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/confirmBt"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:enabled="false"
+        android:text="确认转账"
+        android:textColor="#fff"
+        app:qmui_backgroundColor="@drawable/selector_bt_color"
+        app:qmui_borderWidth="0dp"
+        app:qmui_isRadiusAdjustBounds="true" />
+
 
 </LinearLayout>

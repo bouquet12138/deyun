@@ -41,16 +41,15 @@ public interface RegisterContract {
          * 注册成功后
          */
         void registerSuccess(int userId);
+
+
+        String getPhoneNum();
+
+        String getVerCode();
     }
 
 
     interface IPresenter {
-        /**
-         * 得到验证码
-         *
-         * @return
-         */
-        String getQrCode();
 
         /**
          * 发送验证码

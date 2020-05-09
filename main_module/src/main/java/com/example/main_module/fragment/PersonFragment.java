@@ -54,7 +54,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
     private LinearLayout mRechargeRecord;
 
     private LinearLayout mPromoteIncome;
-    private LinearLayout mTransferRecord;
+    private LinearLayout mTransfer;
     private LinearLayout mPromotionRecord;
     private LinearLayout mAccountManager;
 
@@ -132,7 +132,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mRechargeRecord = mView.findViewById(R.id.rechargeRecord);//充值记录
 
         mPromoteIncome = mView.findViewById(R.id.promoteIncome);
-        mTransferRecord = mView.findViewById(R.id.transferRecord);
+        mTransfer = mView.findViewById(R.id.transfer);
         mPromotionRecord = mView.findViewById(R.id.promotionRecord);
         mAccountManager = mView.findViewById(R.id.accountManager);
 
@@ -156,7 +156,7 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         mPromoteIncome.setOnClickListener(this);
 
 
-        mTransferRecord.setOnClickListener(this);
+        mTransfer.setOnClickListener(this);
         mPromotionRecord.setOnClickListener(this);
         mAccountManager.setOnClickListener(this);
 
@@ -210,9 +210,8 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
                 ARouter.getInstance().build(ARouterContract.PAYROLL_RECORD).withString("type", PayrollBean.PROMOTE_INCOME)//推广收益
                         .navigation();
                 break;
-            case R.id.transferRecord:
-                ARouter.getInstance().build(ARouterContract.PAYROLL_RECORD).withString("type", PayrollBean.TRANSFERS_BETWEEN)//工资互转
-                        .navigation();
+            case R.id.transfer:
+                ARouter.getInstance().build(ARouterContract.PAYROLL_TRANSFERS).navigation();//工资互转
                 break;
             case R.id.promotionRecord:
                 ARouter.getInstance().build(ARouterContract.INTEGRAL_TRANSFERS_RECORD).withString("integralType", IntegralBean.BUY_SET_MEAL)

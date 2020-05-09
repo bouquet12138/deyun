@@ -12,8 +12,11 @@ public class ARouterContract {
 
     public static final String WITHDRAW_WITHDRAW_RECORD = "/withdraw/withdraw_record";
 
+    public static final String WITHDRAW_WITHDRAW = "/withdraw/withdraw";
+
     public static final String INTEGRAL_TRANSFERS_RECORD= "/integral/transfers_record";
 
     public static final String PAYROLL_RECORD= "/payroll/record";
+    public static final String PAYROLL_TRANSFERS= "/payroll/transfers";
 
 }

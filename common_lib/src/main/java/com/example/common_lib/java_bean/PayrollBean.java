@@ -29,18 +29,21 @@ public class PayrollBean {
     private String promote_income_type;//推广收入类型 比如 1:1:0 3:3:0 等
     private int cumulative_day;
     private long remain_record;
+    private String pay_password;
 
-    public PayrollBean(long payroll_amount, String transaction_time,
-                       int user_id, String type, String transaction_remark,
-                       String promote_income_type, int cumulative_day, long remain_record) {
+      /*  IntegralBean integralBean = new IntegralBean(getView().getIntegralAmount(), userBean.getUser_id(),
+                target_user_id, IntegralBean.TRANSFERS_BETWEEN,
+                getView().getRemark(), getView().getPayPassword());*/
+
+    public PayrollBean(long payroll_amount, int user_id,
+                       int target_user_id, String type,
+                       String transaction_remark, String pay_password) {
         this.payroll_amount = payroll_amount;
-        this.transaction_time = transaction_time;
         this.user_id = user_id;
+        this.target_user_id = target_user_id;
         this.type = type;
         this.transaction_remark = transaction_remark;
-        this.promote_income_type = promote_income_type;
-        this.cumulative_day = cumulative_day;
-        this.remain_record = remain_record;
+        this.pay_password = pay_password;
     }
 
     public int getPayroll_id() {
@@ -122,5 +125,13 @@ public class PayrollBean {
 
     public void setTarget_user_id(int target_user_id) {
         this.target_user_id = target_user_id;
+    }
+
+    public String getPay_password() {
+        return pay_password;
+    }
+
+    public void setPay_password(String pay_password) {
+        this.pay_password = pay_password;
     }
 }

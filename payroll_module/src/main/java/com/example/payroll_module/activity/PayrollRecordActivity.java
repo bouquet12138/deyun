@@ -13,6 +13,7 @@ import com.example.baselib.adapter.MyFragmentAdapter;
 import com.example.common_lib.base.AppMvpBaseActivity;
 import com.example.common_lib.contract.ARouterContract;
 import com.example.common_lib.info.NowUserInfo;
+import com.example.common_lib.java_bean.IntegralBean;
 import com.example.common_lib.java_bean.PayrollBean;
 import com.example.common_lib.java_bean.UserBean;
 import com.example.payroll_module.R;
@@ -123,7 +124,9 @@ public class PayrollRecordActivity extends AppMvpBaseActivity implements Payroll
 
     @Override
     protected void onFloatBtClick() {
-        startActivity(new Intent(this, PayrollTransfersActivity.class));
+        // startActivity(new Intent(this, PayrollTransfersActivity.class));
+        ARouter.getInstance().build(ARouterContract.WITHDRAW_WITHDRAW).withString("integralType", IntegralBean.RECHARGE)
+                .navigation();
     }
 
     /**
