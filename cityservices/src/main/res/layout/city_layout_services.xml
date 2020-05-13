@@ -37,6 +37,7 @@
 
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
             android:id="@+id/searchBt"
+            android:layout_marginRight="20dp"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

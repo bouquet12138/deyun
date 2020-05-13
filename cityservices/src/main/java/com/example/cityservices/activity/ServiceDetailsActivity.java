@@ -2,28 +2,46 @@ package com.example.cityservices.activity;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.baselib.util.DensityUtil;
 import com.example.cityservices.R;
 import com.example.common_lib.base.AppMvpBaseActivity;
 import com.example.common_lib.info.ServerInfo;
 import com.example.common_lib.java_bean.StoreBean;
 
+/**
+ * 服务详情
+ */
 public class ServiceDetailsActivity extends AppMvpBaseActivity {
 
     private TextView mStoreName;
     private ImageView mHeadImg;
     private ImageView mLocationImg;
     private TextView mDetailedAddress;
-    private ImageView mPhoneImg;
+
+    private ViewGroup mPhoneGroup;//电话
+    private TextView mPhoneText;
+
     private TextView mBusinessTime;
     private TextView mStoreDescribe;
     private RecyclerView mRecyclerView;
+    private StoreBean mBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +50,42 @@ public class ServiceDetailsActivity extends AppMvpBaseActivity {
         setSubmitEnable(false);//隐藏提交
         intView();
         initData();
+        initListener();
     }
 
     private void initData() {
         Intent intent = getIntent();
-        StoreBean bean = (StoreBean) intent.getSerializableExtra("storeBean");
-        if (bean == null) {
+        mBean = (StoreBean) intent.getSerializableExtra("storeBean");
+        if (mBean == null) {
             finish();
             return;
         }
-        mStoreName.setText(bean.getStore_name());//商店名称
+        setTitle(mBean.getStore_name(), mBean.getStore_type(), mStoreName);
 
-        if (bean.getHead_img() == null) {
+        if (mBean.getHead_img() == null) {
             mHeadImg.setImageResource(R.drawable.image_loading);
         } else
             Glide.with(this).
-                    load(ServerInfo.getImageAddress(bean.getHead_img().getImage_url())).
+                    load(ServerInfo.getImageAddress(mBean.getHead_img().getImage_url())).
                     placeholder(R.drawable.image_loading).error(R.drawable.image_error).into(mHeadImg);
-        mDetailedAddress.setText(bean.getDetailed_address());//详细地址
-        mBusinessTime.setText("营业时间:" + bean.getBusiness_hours());//营业时间
-        mStoreDescribe.setText(bean.getStore_describe());//详细
+        mDetailedAddress.setText(mBean.getDetailed_address());//详细地址
+        mBusinessTime.setText("营业时间:" + mBean.getBusiness_hours());//营业时间
+        mStoreDescribe.setText(mBean.getStore_describe());//详细
+        mPhoneText.setText(mBean.getContact_phone());
+    }
+
+    private void setTitle(String up, String down, TextView textView) {
+
+        String str = up + "\n\n" + down;
+
+        SpannableString spannableString = new SpannableString(str);
+
+        spannableString.setSpan(new AbsoluteSizeSpan(DensityUtil.dipToPx(15)),
+                up.length(), str.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.app_text_color)),
+                up.length(), str.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+        textView.setText(spannableString);
 
     }
 
@@ -63,10 +97,43 @@ public class ServiceDetailsActivity extends AppMvpBaseActivity {
         mHeadImg = findViewById(R.id.headImg);
         mLocationImg = findViewById(R.id.locationImg);
         mDetailedAddress = findViewById(R.id.detailedAddress);
-        mPhoneImg = findViewById(R.id.phoneImg);
         mBusinessTime = findViewById(R.id.businessTime);
         mStoreDescribe = findViewById(R.id.storeDescribe);
         mRecyclerView = findViewById(R.id.recyclerView);
+        mPhoneText = findViewById(R.id.phoneText);
+        mPhoneGroup = findViewById(R.id.phoneView);//电话
+    }
+
+    /**
+     * 初始化监听
+     */
+    private void initListener() {
+
+        mPhoneGroup.setOnClickListener(view -> callPhone());
+
+    }
+
+    private static final String TAG = "ServiceDetailsActivity";
+
+    /**
+     * 拨打电话
+     */
+    private void callPhone() {
+
+        if (TextUtils.isEmpty(mBean.getContact_phone())) {
+            showErrorHint("商家未留电话");
+            return;
+        }
+        Log.d(TAG, "callPhone: " + mBean.getContact_phone());
+
+        try {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + mBean.getContact_phone()));
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            showErrorHint("该手机没有拨打电话的功能");
+        }
     }
 
     @Override

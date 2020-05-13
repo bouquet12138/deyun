@@ -10,173 +10,193 @@
         style="@style/toolBarText"
         android:text="主页" />
 
-    <com.example.common_view.custom_view.MainScrollView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title">
+        android:layout_below="@id/title"
+        app:srlAccentColor="@android:color/white"
+        app:srlEnablePureScrollMode="true">
 
-        <LinearLayout
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_margin="15dp"
-                app:indicator_gravity="right"
-                app:indicator_selected_color="@color/app_title_color">
-
-            </com.youth.banner.Banner>
-
-            <!--上面-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <!--城市服务-->
-                <LinearLayout
-                    android:id="@+id/city"
-                    style="@style/main_home_bt">
-
-                    <ImageView
-                        style="@style/main_drawable_style"
-                        android:src="@drawable/main_city"
-                        android:background="@drawable/main_selector_circle_b"/>
-
-                    <TextView
-                        style="@style/main_text_style"
-                        android:text="城市服务" />
-
-                </LinearLayout>
-
-
-                <!--App推广-->
-                <LinearLayout
-                    android:id="@+id/popularize_app"
-                    style="@style/main_home_bt">
-
-                    <ImageView
-                        style="@style/main_drawable_style"
-                        android:src="@drawable/main_popularize_app"
-                        android:background="@drawable/main_selector_circle_c"/>
-
-                    <TextView
-                        style="@style/main_text_style"
-                        android:text="APP推广" />
-
-                </LinearLayout>
-
-                <!--会员注册-->
-                <LinearLayout
-                    android:id="@+id/member_register"
-                    style="@style/main_home_bt">
-
-                    <ImageView
-                        style="@style/main_drawable_style"
-                        android:src="@drawable/main_member"
-                        android:background="@drawable/main_selector_circle_d"/>
-
-                    <TextView
-                        style="@style/main_text_style"
-                        android:text="会员注册" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!--下面-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:orientation="vertical"
+                android:padding="15dp">
 
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:indicator_gravity="right"
+                    app:indicator_selected_color="@color/app_title_color">
 
-                <!--客户中心-->
+                </com.youth.banner.Banner>
+
+                <!--上面-->
                 <LinearLayout
-                    android:id="@+id/user_center"
-                    style="@style/main_home_bt">
-
-                    <ImageView
-
-                        style="@style/main_drawable_style"
-                        android:src="@drawable/main_service"
-                        android:background="@drawable/main_selector_circle_e"/>
-
-                    <TextView
-                        style="@style/main_text_style"
-                        android:text="客服中心" />
-
-                </LinearLayout>
-
-
-                <!--关于我们-->
-                <LinearLayout
-                    android:id="@+id/about_us"
-                    style="@style/main_home_bt">
-
-                    <ImageView
-
-                        style="@style/main_drawable_style"
-                        android:padding="5dp"
-                        android:src="@drawable/main_about_us"
-                        android:background="@drawable/main_selector_circle_f"
-                        />
-
-                    <TextView
-                        style="@style/main_text_style"
-                        android:text="关于我们" />
-
-                </LinearLayout>
-
-                <!--我的店铺-->
-                <LinearLayout
-
-                    android:id="@+id/myShop"
-                    style="@style/main_home_bt"
-                    android:visibility="invisible">
-
-                    <ImageView
-                        style="@style/main_drawable_style"
-                        android:background="@drawable/main_selector_circle_a"
-                        android:src="@drawable/main_join_us" />
-
-                    <TextView
-                        style="@style/main_text_style"
-                        android:text="加入我们" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <!--标题-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:padding="10dp">
-
-                <View
-                    android:layout_width="10dp"
-                    android:layout_height="20dp"
-                    android:background="@color/app_title_color" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="公司简介"
-                    android:textColor="@color/app_dark_text_color" />
+                    android:layout_marginTop="15dp"
+                    android:paddingLeft="-15dp"
+                    android:paddingRight="-15dp">
+
+
+                    <!--城市服务-->
+                    <LinearLayout
+                        android:id="@+id/city"
+                        style="@style/main_home_bt">
+
+                        <ImageView
+                            style="@style/main_drawable_style"
+                            android:background="@drawable/main_selector_circle_b"
+                            android:src="@drawable/main_city" />
+
+                        <TextView
+                            style="@style/main_text_style"
+                            android:text="城市服务" />
+
+                    </LinearLayout>
+
+
+                    <!--App推广-->
+                    <LinearLayout
+                        android:id="@+id/popularize_app"
+                        style="@style/main_home_bt">
+
+                        <ImageView
+                            style="@style/main_drawable_style"
+                            android:background="@drawable/main_selector_circle_c"
+                            android:src="@drawable/main_popularize_app" />
+
+                        <TextView
+                            style="@style/main_text_style"
+                            android:text="APP推广" />
+
+                    </LinearLayout>
+
+                    <!--会员注册-->
+                    <LinearLayout
+                        android:id="@+id/member_register"
+                        style="@style/main_home_bt">
+
+                        <ImageView
+                            style="@style/main_drawable_style"
+                            android:background="@drawable/main_selector_circle_d"
+                            android:src="@drawable/main_member" />
+
+                        <TextView
+                            style="@style/main_text_style"
+                            android:text="会员注册" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--下面-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="-15dp"
+                    android:paddingRight="-15dp">
+
+
+                    <!--客户中心-->
+                    <LinearLayout
+                        android:id="@+id/user_center"
+                        style="@style/main_home_bt">
+
+                        <ImageView
+
+                            style="@style/main_drawable_style"
+                            android:background="@drawable/main_selector_circle_e"
+                            android:src="@drawable/main_service" />
+
+                        <TextView
+                            style="@style/main_text_style"
+                            android:text="客服中心" />
+
+                    </LinearLayout>
+
+
+                    <!--关于我们-->
+                    <LinearLayout
+                        android:id="@+id/about_us"
+                        style="@style/main_home_bt">
+
+                        <ImageView
+
+                            style="@style/main_drawable_style"
+                            android:background="@drawable/main_selector_circle_f"
+                            android:padding="5dp"
+                            android:src="@drawable/main_about_us" />
+
+                        <TextView
+                            style="@style/main_text_style"
+                            android:text="关于我们" />
+
+                    </LinearLayout>
+
+                    <!--我的店铺-->
+                    <LinearLayout
+
+                        android:id="@+id/myShop"
+                        style="@style/main_home_bt"
+                        android:visibility="invisible">
+
+                        <ImageView
+                            style="@style/main_drawable_style"
+                            android:background="@drawable/main_selector_circle_a"
+                            android:src="@drawable/main_join_us" />
+
+                        <TextView
+                            style="@style/main_text_style"
+                            android:text="加入我们" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <!--标题-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="20dp"
+                        android:background="@color/app_title_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="公司业务范围"
+                        android:textColor="@color/app_dark_text_color"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
+
 
             </LinearLayout>
 
 
-        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-    </com.example.common_view.custom_view.MainScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
 </RelativeLayout>

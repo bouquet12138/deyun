@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +18,14 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.baselib.util.CornerUtil;
 import com.example.baselib.util.DensityUtil;
+import com.example.baselib.view.SpacesItemDecoration;
 import com.example.common_lib.contract.ARouterContract;
 import com.example.main_module.R;
 import com.example.main_module.activity.AboutUsActivity;
 import com.example.main_module.activity.PromotionActivity;
 import com.example.main_module.activity.ServiceCenterActivity;
+import com.example.main_module.adapter.BusinessAdapter;
+import com.example.main_module.adapter.BusinessBean;
 import com.example.main_module.adapter.ImageAdapter;
 import com.youth.banner.Banner;
 
@@ -45,12 +50,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ViewGroup mUser_center;
     private ViewGroup mAbout_us;
 
+    private RecyclerView mRecyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.main_fragment_home, container, false);
         initView();
         initListener();
         initBanner();
+        initData();
         return mView;
     }
 
@@ -67,6 +75,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mBanner.start();//启动banner
     }
 
+    private void initData() {
+        List<BusinessBean> businessBeans = new ArrayList<>();
+        businessBeans.add(new BusinessBean(R.drawable.main_network, "网站建设"));
+        businessBeans.add(new BusinessBean(R.drawable.main_applet, "小程序开发"));
+        businessBeans.add(new BusinessBean(R.drawable.main_clip, "视频剪辑"));
+        businessBeans.add(new BusinessBean(R.drawable.main_ad, "商业广告"));
+        BusinessAdapter businessAdapter = new BusinessAdapter(businessBeans);
+        mRecyclerView.setAdapter(businessAdapter);
+        mRecyclerView.addItemDecoration(new SpacesItemDecoration(DensityUtil.dipToPx(5)));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//布局管理器
+    }
+
     private void initView() {
         mTitle = mView.findViewById(R.id.title);
         mBanner = mView.findViewById(R.id.banner);
@@ -76,6 +96,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mMember_register = mView.findViewById(R.id.member_register);
         mUser_center = mView.findViewById(R.id.user_center);
         mAbout_us = mView.findViewById(R.id.about_us);
+        mRecyclerView = mView.findViewById(R.id.recyclerView);
     }
 
     /**

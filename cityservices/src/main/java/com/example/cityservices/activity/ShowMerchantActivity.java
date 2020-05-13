@@ -3,60 +3,75 @@ package com.example.cityservices.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.baselib.util.CollectionsUtil;
+import com.example.baselib.base.MVPBaseActivity;
 import com.example.baselib.util.DensityUtil;
 import com.example.baselib.view.SpacesItemDecoration;
 import com.example.cityservices.R;
 import com.example.cityservices.adapter.StoreAdapter;
 import com.example.cityservices.contract.ShowMerchantContract;
 import com.example.cityservices.presenter.ShowMerchantPresenter;
-import com.example.common_lib.base.AppMvpBaseActivity;
 import com.example.common_lib.java_bean.StoreBean;
-import com.scwang.smartrefresh.header.PhoenixHeader;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.List;
 
-public class ShowMerchantActivity extends AppMvpBaseActivity implements ShowMerchantContract.IView {
+public class ShowMerchantActivity extends MVPBaseActivity implements ShowMerchantContract.IView {
 
     private String mProvince;
     private String mCity;
     private String mDistrict;
     private String mStoreName;
 
+
+    private ImageView mBackButton;
+    private SmartRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
+
+    private ViewGroup mNetErrorLayout;
+    private Button mRefresh;
+
+
     private StoreAdapter mStoreAdapter;//商店适配器
     private ShowMerchantPresenter mPresenter = new ShowMerchantPresenter();
+    private boolean mBottomNoMoreData;//没有更多数据了
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setSubmitEnable(false);//提交按钮不可用
+        setContentView(R.layout.city_layout_show_merchant);
         initView();
         initData();
+        initListener();
         mPresenter.attachView(this);//绑定view
         mPresenter.initStoreInfo();//初始化一下商店信息
     }
+
 
     /**
      * 初始化view
      */
     private void initView() {
 
-        mSmartRefreshLayout.setPrimaryColors(getResources().getColor(R.color.app_title_color));
-        mSmartRefreshLayout.setEnableLoadMore(true);//加载更多不可用
-        mSmartRefreshLayout.setEnableHeaderTranslationContent(true);
-        mSmartRefreshLayout.setEnablePureScrollMode(false);//不是只滑动
+        mBackButton = findViewById(R.id.backButton);
+        mRefreshLayout = findViewById(R.id.refreshLayout);
+        mRecyclerView = findViewById(R.id.recyclerView);
 
-        PhoenixHeader header = new PhoenixHeader(this);
-        mSmartRefreshLayout.setRefreshHeader(header);//设置头布局
+        mNetErrorLayout = findViewById(R.id.netErrorLayout);
+        mRefresh = findViewById(R.id.refresh);
 
-        mRecyclerView = mNormalView.findViewById(R.id.recyclerView);//recyclerView
+        mNetErrorLayout.setVisibility(View.GONE);//不可见
     }
 
     /**
@@ -71,30 +86,13 @@ public class ShowMerchantActivity extends AppMvpBaseActivity implements ShowMerc
         mStoreName = intent.getStringExtra("store_name");
     }
 
-
-    @Override
-    protected String getTitleName() {
-        return "商家展示";
-    }
-
-    @Override
-    protected String getRightTextName() {
-        return "";
-    }
-
-    @Override
-    protected int getFloatBtImgRes() {
-        return 0;
-    }
-
-    @Override
-    protected int getNormalViewId() {
-        return R.layout.city_layout_show_merchant;
-    }
-
-    @Override
-    protected void onFloatBtClick() {
-
+    /**
+     * 初始化监听
+     */
+    private void initListener() {
+        mBackButton.setOnClickListener(view -> {
+            finish();
+        });
     }
 
     /**
@@ -113,48 +111,24 @@ public class ShowMerchantActivity extends AppMvpBaseActivity implements ShowMerc
         context.startActivity(intent);
     }
 
-
-    @Override
-    public void initStoreList(List<StoreBean> storeList) {
-        if (CollectionsUtil.isEmpty(storeList)) {
-            showNoMoreData();//没有更多数据
-        } else {
-            showNormalView();//展示正常数据
-            refreshStoreList(storeList);
-        }
-    }
-
-    @Override
-    public void completeRefreshStoreList(List<StoreBean> storeList) {
-        mSmartRefreshLayout.finishRefresh();//结束刷新
-        refreshStoreList(storeList);
-    }
-
-    @Override
-    public void completeLoadMoreStoreList(List<StoreBean> storeList) {
-        mSmartRefreshLayout.finishLoadMore();//结束加载更多
-        refreshStoreList(storeList);
-    }
-
-
     @Override
     public String getProvince() {
-        return mProvince;
+        return TextUtils.isEmpty(mProvince) ? "" : mProvince;
     }
 
     @Override
     public String getCity() {
-        return mCity;
+        return TextUtils.isEmpty(mCity) ? "" : mCity;
     }
 
     @Override
     public String getDistrict() {
-        return mDistrict;
+        return TextUtils.isEmpty(mDistrict) ? "" : mDistrict;
     }
 
     @Override
     public String getStoreName() {
-        return mStoreName;
+        return TextUtils.isEmpty(mStoreName) ? "" : mStoreName;
     }
 
     private static final String TAG = "ShowMerchantActivity";
@@ -162,7 +136,8 @@ public class ShowMerchantActivity extends AppMvpBaseActivity implements ShowMerc
     /**
      * 刷新商店列表
      */
-    private void refreshStoreList(List<StoreBean> storeList) {
+    @Override
+    public void refreshStoreList(List<StoreBean> storeList) {
 
         if (mStoreAdapter == null) {
             mStoreAdapter = new StoreAdapter(storeList);
@@ -176,6 +151,53 @@ public class ShowMerchantActivity extends AppMvpBaseActivity implements ShowMerc
         } else {
             mStoreAdapter.notifyDataSetChanged();//唤醒数据更新
         }
+    }
+
+    /**
+     * 没有更多数据
+     */
+    @Override
+    public void setFootNoMoreData() {
+        mRefreshLayout.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
+        mBottomNoMoreData = true;//底部没有更多数据
+    }
+
+    @Override
+    public void showNormalView() {
+        mRecyclerView.setVisibility(View.VISIBLE);//可见
+        if (!mBottomNoMoreData)
+            mRefreshLayout.setEnableLoadMore(true);
+        mNetErrorLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNetError() {
+        mRecyclerView.setVisibility(View.GONE);//可见
+        if (!mBottomNoMoreData)
+            mRefreshLayout.setEnableLoadMore(false);
+        mNetErrorLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showErrorHint(String msg) {
+        QMUITipDialog errorDialog = new QMUITipDialog.Builder(getContext())
+                .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
+                .setTipWord(msg)
+                .create();
+        errorDialog.show();//展示一下
+        mBackButton.postDelayed(() -> errorDialog.dismiss(), 1000);
+    }
+
+    @Override
+    public void completeRefresh() {
+        if (mBottomNoMoreData)
+            setFootNoMoreData();//没有更多数据
+        mRefreshLayout.finishRefresh();//结束刷新
+    }
+
+    @Override
+    public void completeLoadMore() {
+        mRefreshLayout.finishLoadMore();//完成加载更多
     }
 
     /**

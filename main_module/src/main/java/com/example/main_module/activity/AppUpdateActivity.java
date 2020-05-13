@@ -128,7 +128,7 @@ public class AppUpdateActivity extends AppMvpBaseActivity implements View.OnClic
         }
     }
 
-    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     public void useApkDownLoadFunction() {
         XUpdate.newBuild(this)
                 .apkCacheDir(PathUtils.getExternalDownloadsPath())
