@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:padding="10dp">
 
+
     <LinearLayout style="@style/personInfoBackGroundStyle">
 
         <TextView
@@ -193,6 +194,15 @@
         app:qmui_backgroundColor="@drawable/selector_bt_color"
         app:qmui_borderWidth="0dp"
         app:qmui_isRadiusAdjustBounds="true" />
+
+    <TextView
+        android:id="@+id/withdrawTextView"
+        android:padding="10dp"
+        android:layout_gravity="right"
+        android:textColor="@color/app_title_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提现规则" />
 
 
 </LinearLayout>

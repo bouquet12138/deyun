@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.example.baselib.listener.OnGetInfoListener;
 import com.example.baselib.util.OkHttpUtil;
-import com.example.common_lib.bean.AppBean;
 import com.example.common_lib.info.ServerInfo;
+import com.example.common_lib.java_bean.AppBean;
 import com.example.common_lib.java_bean.BaseBean;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +24,7 @@ public class AppModel {
      */
     public void getAppInfo(OnGetInfoListener<BaseBean<AppBean>> listener) {
 
-        OkHttpUtil.postJson(ServerInfo.getImageAddress("get_app_info"), "", new Callback() {
+        OkHttpUtil.postJson(ServerInfo.getServerAddress("get_app_info"), "", new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 listener.onComplete();

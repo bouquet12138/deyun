@@ -10,7 +10,7 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
@@ -58,7 +58,9 @@ dependencies {
     androidTestImplementation rootProject.ext.testDeps["runner"]
     androidTestImplementation rootProject.ext.testDeps["espresso-core"]
 
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+    annotationProcessor compilerDeps["arouter-compiler"]
+    annotationProcessor compilerDeps["permissionsdispatcher"]
+    annotationProcessor compilerDeps["arch-compiler"]
 
     implementation project(':common_lib')
 
@@ -67,5 +69,6 @@ dependencies {
         implementation project(':withdraw_module')
         implementation project(':integral_module')
         implementation project(':payroll_module')
+        implementation project(':cityservices')
     }
 }

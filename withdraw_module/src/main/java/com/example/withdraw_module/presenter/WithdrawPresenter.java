@@ -31,7 +31,8 @@ public class WithdrawPresenter extends MVPBasePresenter<WithdrawContract.IView>
                 case SUCCESS:
                     BaseBean baseBean = (BaseBean) msg.obj;
                     if (baseBean.getCode() == 1) {
-                        getView().showToast(baseBean.getMsg());//展示提示信息
+                        getView().showToast("提现成功，等待处理");
+                        // getView().showToast(baseBean.getMsg());//展示提示信息
                         getView().withdrawSuccess();//提现成功
                     } else {
                         getView().showErrorHint(baseBean.getMsg());//提示信息

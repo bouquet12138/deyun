@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.baselib.util.DensityUtil;
 import com.example.common_lib.base.AppMvpBaseActivity;
-import com.example.common_lib.bean.AppBean;
+import com.example.common_lib.info.ServerInfo;
+import com.example.common_lib.java_bean.AppBean;
 import com.example.main_module.R;
 import com.example.main_module.contract.AppContract;
 import com.example.main_module.presenter.AppPresenter;
@@ -109,12 +110,12 @@ public class PromotionActivity extends AppMvpBaseActivity implements AppContract
     }
 
     private static final String TAG = "PromotionActivity";
-    
+
     @Override
     public void setAppInfo(AppBean appBean) {
         Log.d(TAG, "setAppInfo: " + appBean);
         if (appBean != null && appBean.getApp_url() != null)
             Glide.with(this).load(getQrCode(DensityUtil.dipToPx(300),
-                    DensityUtil.dipToPx(300), appBean.getApp_url())).into(mAppImage);
+                    DensityUtil.dipToPx(300), ServerInfo.getServerAddress(appBean.getApp_url()))).into(mAppImage);
     }
 }

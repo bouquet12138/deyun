@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.example.common_lib.base.AppMvpBaseActivity;
+import com.example.common_lib.info.NowUserInfo;
 import com.example.common_view.custom_view.ShowPasswordView;
 import com.example.common_view.editText.MyEditText;
 import com.example.zhixiaoapp.R;
@@ -71,6 +72,9 @@ public class ForgetPayPassActivity extends AppMvpBaseActivity implements View.On
         mPasswordBt2 = findViewById(R.id.passwordBt2);
         mPasswordBt1.setEditText(mPayPassword.getEditText());
         mPasswordBt2.setEditText(mConfirmPayPassword.getEditText());
+
+        mMyTelPhone.setText(NowUserInfo.getNowUserPhone());
+        mMyTelPhone.setCursorPosition();//设置光标位置
     }
 
     private void initListener() {

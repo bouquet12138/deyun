@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -23,6 +24,7 @@ import com.example.common_view.custom_view.ShowPasswordView;
 import com.example.common_view.editText.MyEditText;
 import com.example.zhixiaoapp.R;
 import com.example.zhixiaoapp.contract.LoginContract;
+import com.example.zhixiaoapp.custom_view.SelectImg;
 import com.example.zhixiaoapp.presenter.LoginPresenter;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
@@ -43,6 +45,8 @@ public class LoginActivity extends MVPBaseActivity implements LoginContract.IVie
 
     private TextView mUserText;
     private TextView mPrivacyText;
+
+    private SelectImg mRadioButton;//单选按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,7 @@ public class LoginActivity extends MVPBaseActivity implements LoginContract.IVie
         mConfirmBt = findViewById(R.id.confirmBt);
         mUserText = findViewById(R.id.userText);
         mPrivacyText = findViewById(R.id.privacyText);
+        mRadioButton = findViewById(R.id.radio);
 
         mOpenImage.setEditText(mPasswordEdit.getEditText());
     }
@@ -92,7 +97,10 @@ public class LoginActivity extends MVPBaseActivity implements LoginContract.IVie
                 .addAction("确定", (dialog, index) -> dialog.dismiss())
                 .show());
         mConfirmBt.setOnClickListener(view -> {
-            mLoginPresenter.login();//登陆一下
+            if (!mRadioButton.isSelect())
+                showToast("请先同意用户隐私条例");
+            else
+                mLoginPresenter.login();//登陆一下
         });
         mAutoLand.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked)
@@ -112,6 +120,11 @@ public class LoginActivity extends MVPBaseActivity implements LoginContract.IVie
         mAccountEdit.setOnTextChangedListener(onTextChangedListener);
         mPasswordEdit.setOnTextChangedListener(onTextChangedListener);
 
+    }
+
+    @Override
+    public void setAgree(boolean agree) {
+        mRadioButton.setSelect(agree);
     }
 
     @Override
@@ -148,12 +161,12 @@ public class LoginActivity extends MVPBaseActivity implements LoginContract.IVie
 
     @Override
     public String getAccount() {
-        return mAccountEdit.getText().toString();
+        return mAccountEdit.getText();
     }
 
     @Override
     public String getPassword() {
-        return mPasswordEdit.getText().toString();
+        return mPasswordEdit.getText();
     }
 
     @Override

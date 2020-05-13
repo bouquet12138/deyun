@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.AppUtils;
 import com.example.common_lib.contract.ARouterContract;
 import com.example.main_module.R;
 
 public class MainStartActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainStartActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +23,7 @@ public class MainStartActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity_start);
         ARouter.getInstance().build(ARouterContract.LOGIN_START) //跳转到登陆页面
                 .navigation();
+        Log.e(TAG, "onCreate: " + AppUtils.getAppSignatureMD5());
         finish();
     }
 
@@ -41,7 +46,6 @@ public class MainStartActivity extends AppCompatActivity {
             decorView.setSystemUiVisibility(option);
         }
     }
-
 
 
 }

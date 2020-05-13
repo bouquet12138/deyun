@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.baselib.base.MVPBasePresenter;
 import com.example.baselib.listener.OnGetInfoListener;
 import com.example.baselib.util.NetWorkUtils;
+import com.example.common_lib.info.NowUserInfo;
 import com.example.common_lib.java_bean.BaseBean;
 import com.example.common_lib.java_bean.UserBean;
 import com.example.common_lib.model.UserModel;
@@ -22,6 +23,10 @@ public class MyTeamPresenter extends MVPBasePresenter<MyTeamContract.IView>
     private final int SUCCESS = 0;//成功
     private final int NET_ERROR = 1;//网络错误
     private final int COMPLETE = 2;//完成
+
+    private final int INFO_ON_RESULT = 3;
+    private final int INFO_NET_ERROR = 4;//网络错误
+    private final int INFO_ON_COMPLETE = 5;//完成
 
     private boolean mSuccess = false;
 
@@ -50,6 +55,24 @@ public class MyTeamPresenter extends MVPBasePresenter<MyTeamContract.IView>
                 case COMPLETE:
                     getView().hideLoading();//隐藏进度框
                     break;
+                case INFO_ON_RESULT:
+                    BaseBean<UserBean> baseBean1 = (BaseBean<UserBean>) msg.obj;//得到用户id
+                    // getView().showToast(baseBean.getMsg());//弹出提示信息
+                    if (baseBean1.getCode() == 1) {
+                        if (baseBean1.getData().getUser_id() == NowUserInfo.getNowUserId())
+                            NowUserInfo.setNowUserInfo(baseBean1.getData());//设置当前用户信息
+                        Log.d(TAG, "handleMessage: " + baseBean1.getData());
+                        getMyTeamInfoNext(baseBean1.getData().getUser_id());
+                    } else {
+                        getView().hideLoading();//隐藏加载进度框
+                    }
+                    break;
+                case INFO_NET_ERROR:
+                    getView().hideLoading();//隐藏加载进度框
+                    getView().showToast("网络错误");
+                    break;
+                case INFO_ON_COMPLETE:
+                    break;
             }
         }
     };
@@ -65,6 +88,33 @@ public class MyTeamPresenter extends MVPBasePresenter<MyTeamContract.IView>
             getView().showNetError();//展示网络错误
             return;
         }
+
+        mModel.getUserInfo(userId, new OnGetInfoListener<BaseBean<UserBean>>() {
+            @Override
+            public void onResult(BaseBean<UserBean> info) {
+                Message msg = mHandler.obtainMessage();
+                msg.what = INFO_ON_RESULT;//结果
+                msg.obj = info;
+                mHandler.sendMessage(msg);//发送信息
+            }
+
+            @Override
+            public void onNetError() {
+                mHandler.sendEmptyMessage(INFO_NET_ERROR);//网络错误
+            }
+
+            @Override
+            public void onComplete() {
+                mHandler.sendEmptyMessage(INFO_ON_COMPLETE);//完成
+            }
+        });
+
+    }
+
+    public void getMyTeamInfoNext(int userId) {
+        if (!isViewAttached())
+            return;
+
 
         Log.d(TAG, "getMyTeamInfo: " + userId);
 

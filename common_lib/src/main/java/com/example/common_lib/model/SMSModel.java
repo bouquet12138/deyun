@@ -22,7 +22,7 @@ public class SMSModel {
 
     public void sendQrCode(String mobile, String qrCode, OnGetInfoListener<SMSBean> listener) {
 
-        String address = "http://v.juhe.cn/sms/send?mobile=" + mobile + "&tpl_id=212285&tpl_value=%23code%23%3D" + qrCode + "&key=86f66e90100d21a21ab62c3eb8373249";
+        String address = "http://v.juhe.cn/sms/send?mobile=" + mobile + "&tpl_id=214625&tpl_value=%23code%23%3D" + qrCode + "&key=86f66e90100d21a21ab62c3eb8373249";
 
         OkHttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override

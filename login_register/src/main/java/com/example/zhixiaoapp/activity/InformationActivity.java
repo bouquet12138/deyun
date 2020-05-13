@@ -76,6 +76,7 @@ public class InformationActivity extends SelectImagePermissionActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showNormalView();//展示正常view
+
         setSubmitEnable(true);//提交按钮可用
         initView();
         initData();//初始化一些数据
@@ -84,6 +85,7 @@ public class InformationActivity extends SelectImagePermissionActivity
         mPresenter.attachView(this);//绑定一下view
         //预先加载仿iOS滚轮实现的全部数据
         mPicker.init(this);
+
     }
 
     /**
@@ -263,7 +265,7 @@ public class InformationActivity extends SelectImagePermissionActivity
     }
 
     @Override
-    public int getUserId() {
+    public int getUserID() {
         return mUserId;
     }
 

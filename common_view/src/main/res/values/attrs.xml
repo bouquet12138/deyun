@@ -65,14 +65,13 @@
     <declare-styleable name="MyEditText">
         <attr name="hint" format="string" />
         <attr name="maxLength" format="integer" />
+        <attr name="maxLines" format="integer" />
         <attr name="inputType" format="enum">
 
             <enum name="text" value="0" />
             <enum name="textPassword" value="1" />
             <enum name="number" value="2" />
             <enum name="number_password" value="3" />
-
-
         </attr>
     </declare-styleable>
 

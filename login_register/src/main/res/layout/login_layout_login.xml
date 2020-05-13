@@ -21,7 +21,10 @@
             android:maxLines="1"
             android:paddingLeft="40dp"
             android:textColor="#666"
-            app:hint="请输入账号(手机号)" />
+            app:hint="请输入账号(手机号)"
+            app:inputType="number"
+            app:maxLength="11"
+            app:maxLines="1" />
 
         <ImageView
             android:layout_width="40dp"
@@ -42,11 +45,12 @@
             android:layout_height="match_parent"
             android:background="@drawable/app_selector_input"
             android:gravity="center_vertical"
-            app:inputType="textPassword"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
             android:textColor="#666"
-            app:hint="请输入密码" />
+            app:hint="请输入密码"
+            app:inputType="textPassword"
+            app:maxLines="1" />
 
         <ImageView
             android:layout_width="40dp"

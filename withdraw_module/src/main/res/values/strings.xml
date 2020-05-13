@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">withdraw_module</string>
+    <!---->
+    <string name="withdrawal_rules">
+        <![CDATA[
+        1.提现只能提整百<br />
+        2.未开通三区提现会有10%转入积分，3%的个人所得税，3%的服务费<br />
+        3.开通三区后提现会有20%转入积分，3%的个人所得税，3%的服务费<br />
+        ]]>
+    </string>
+
 </resources>

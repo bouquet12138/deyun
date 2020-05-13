@@ -40,11 +40,12 @@ public class IntegralRecordPresenter extends MVPBasePresenter<IntegralRecordCont
                     BaseBean<List<IntegralBean>> baseBean = (BaseBean) msg.obj;
                     if (baseBean.getCode() == 1) {
                         mIntegralBeans.clear();
-                        for (IntegralBean integralBean : baseBean.getData()) {
-                            Log.d(TAG, "handleMessage: " + getView().getIntegralType());
-                            if (integralBean.getIntegral_type().equals(getView().getIntegralType()))//积分类型
-                                mIntegralBeans.add(integralBean);//添加进去
-                        }
+                        if (baseBean.getData() != null)
+                            for (IntegralBean integralBean : baseBean.getData()) {
+                                Log.d(TAG, "handleMessage: " + getView().getIntegralType());
+                                if (integralBean.getIntegral_type().equals(getView().getIntegralType()))//积分类型
+                                    mIntegralBeans.add(integralBean);//添加进去
+                            }
                         Collections.reverse(mIntegralBeans);//反转一下数据
                         mSuccess = true;//信息获取成功
                         getView().setIntegralTransfersRecord(mIntegralBeans);//设置积分互转信息

@@ -2,7 +2,8 @@ package com.example.common_lib.info;
 
 public class ServerInfo {
 
-    private static final String SERVER_IP = "http://47.94.1.12:9090/";//服务器ip
+    //120.27.11.67:9090 47.94.1.12:9090
+    private static final String SERVER_IP = "http://120.27.11.67:9090/";//服务器ip
     private static final String SERVER_PROJECT = SERVER_IP + "";//服务器ip
 
 
@@ -20,5 +21,7 @@ public class ServerInfo {
         //http://47.94.1.12:8080/groupimage/6c155734-04c9-47d2-a298-5608185c2394.png
         return SERVER_IP + "" + imageName;
     }
+
+
 
 }

@@ -7,6 +7,13 @@ public interface LoginContract {
 
     interface IView extends IMVPBaseView {
 
+        /**
+         * 是否同意隐私条例
+         *
+         * @param agree
+         */
+        void setAgree(boolean agree);
+
         void setAccount(String account);
 
         void setPassword(String password);

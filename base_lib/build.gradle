@@ -49,4 +49,8 @@ dependencies {
 
     // TODO
     api 'com.blankj:utilcodex:1.27.2'
+
+ /*   annotationProcessor compilerDeps["permissionsdispatcher"]
+    annotationProcessor compilerDeps["arch-compiler"]
+    annotationProcessor compilerDeps["arouter-compiler"]*/
 }

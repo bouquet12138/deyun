@@ -12,11 +12,17 @@ import com.example.baselib.adapter.MyFragmentAdapter;
 import com.example.baselib.base.MVPBaseActivity;
 import com.example.baselib.util.NetType;
 import com.example.common_lib.contract.ARouterContract;
+import com.example.common_lib.info.ServerInfo;
 import com.example.common_view.bean.BottomBean;
 import com.example.common_view.bottom_view.BottomNavigationView;
 import com.example.main_module.R;
+import com.example.main_module.custom.CustomUpdateParser;
+import com.example.main_module.custom.CustomUpdatePrompter;
 import com.example.main_module.fragment.HomeFragment;
 import com.example.main_module.fragment.PersonFragment;
+import com.example.main_module.utils.CProgressDialogUtils;
+import com.xuexiang.xupdate.XUpdate;
+import com.xuexiang.xupdate.proxy.impl.DefaultUpdateChecker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +44,11 @@ public class MainActivity extends MVPBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_main);
-
         initView();
         initAdapter();
         initListener();
+        checkUpdate();
     }
-
 
     private void initView() {
         mViewPager = findViewById(R.id.viewPager);
@@ -70,6 +75,33 @@ public class MainActivity extends MVPBaseActivity {
         mViewPager.setAdapter(myFragmentAdapter);//设置适配器
     }
 
+    /**
+     * 检测更新
+     */
+    private void checkUpdate() {
+
+        String appUrl = ServerInfo.getServerAddress("get_app_info");//app信息
+
+        XUpdate.newBuild(this)
+                .updateUrl(appUrl)
+                .updateChecker(new DefaultUpdateChecker() {
+                    @Override
+                    public void onBeforeCheck() {
+                        super.onBeforeCheck();
+                        CProgressDialogUtils.showProgressDialog(MainActivity.this, "查询中...");
+                    }
+
+                    @Override
+                    public void onAfterCheck() {
+                        super.onAfterCheck();
+                        CProgressDialogUtils.cancelProgressDialog(MainActivity.this);
+                    }
+                })
+                .updateParser(new CustomUpdateParser())
+                .updatePrompter(new CustomUpdatePrompter(MainActivity.this))
+                .update();
+
+    }
 
     /**
      * 初始化监听

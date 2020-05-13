@@ -20,7 +20,7 @@ public interface InformationContract {
          *
          * @return
          */
-        int getUserId();
+        int getUserID();
     }
 
     interface IPresenter {

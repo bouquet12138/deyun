@@ -123,6 +123,8 @@ public class LoginPresenter extends MVPBasePresenter<LoginContract.IView>
 
         editor.putBoolean("isAutoLogin", isAutoLand);
         editor.putBoolean("isRememberPassWord", rememberPassword);
+        editor.putBoolean("agree", true);//同意隐私条例
+
         //如果记住密码
         if (rememberPassword) {
             editor.putString("account", account);
@@ -152,6 +154,8 @@ public class LoginPresenter extends MVPBasePresenter<LoginContract.IView>
 
         boolean isAutoLogin = preferences.getBoolean("isAutoLogin", false);
         boolean isRememberPassWord = preferences.getBoolean("isRememberPassWord", false);
+        boolean agree = preferences.getBoolean("agree", true);
+        getView().setAgree(agree);
 
         if (isAutoLogin)
             getView().setAutoLandChecked();//自动登陆

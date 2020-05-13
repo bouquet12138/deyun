@@ -59,15 +59,15 @@ public class WithdrawRecordAdapter extends RecyclerView.Adapter<WithdrawRecordAd
             holder.mAlipayText.setText("支付宝:\u3000\u3000" + bean.getAlipay());
         }
 
-        holder.mRemainAmount.setText("剩余积分:\u3000" + bean.getRemain_record());//剩余积分
+        holder.mRemainAmount.setText("剩余工资:\u3000" + bean.getRemain_record());//剩余工资
 
-        holder.mRemarkText.setText("备注:\u3000\u3000\u3000");
+        holder.mRemarkText.setText("备注:\u3000\u3000\u3000" + bean.getWithdraw_remark());
 
         if (bean.getIs_process() == 1) {
             holder.mIsProcessText.setText("是否处理:\u3000是");
             holder.mHandleTime.setVisibility(View.VISIBLE);
             holder.mHandleTime.setText("处理时间:\u3000" + bean.getHandle_time());
-        }else{
+        } else {
             holder.mIsProcessText.setText("是否处理:\u3000否");
             holder.mHandleTime.setVisibility(View.GONE);
         }

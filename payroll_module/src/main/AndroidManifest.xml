@@ -3,9 +3,12 @@
     package="com.example.payroll_module">
 
     <application>
-        <activity android:name=".activity.PayrollTransfersActivity"></activity>
-        <activity android:name=".activity.PayrollRecordActivity">
-        </activity>
+        <activity
+            android:name=".activity.PayrollTransfersActivity"
+            android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.PayrollRecordActivity"
+            android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,7 @@
 package com.example.main_module.contract;
 
 import com.example.common_lib.base.IAppMvpView;
-import com.example.common_lib.bean.AppBean;
+import com.example.common_lib.java_bean.AppBean;
 
 public interface AppContract {
 

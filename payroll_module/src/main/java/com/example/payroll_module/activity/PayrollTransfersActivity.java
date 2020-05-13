@@ -60,6 +60,9 @@ public class PayrollTransfersActivity extends AppMvpBaseActivity implements Payr
 
         mConfirmBt = findViewById(R.id.confirmBt);//确认按钮
         mPasswordBt.setEditText(mPassword);
+
+        mRemark.setText("转账");
+
     }
 
     /**

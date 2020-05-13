@@ -19,7 +19,6 @@ import com.example.baselib.util.DensityUtil;
 import com.example.common_lib.contract.ARouterContract;
 import com.example.main_module.R;
 import com.example.main_module.activity.AboutUsActivity;
-import com.example.main_module.activity.CityServicesActivity;
 import com.example.main_module.activity.PromotionActivity;
 import com.example.main_module.activity.ServiceCenterActivity;
 import com.example.main_module.adapter.ImageAdapter;
@@ -84,14 +83,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
      */
     private void initListener() {
 
-
         mMyShop.setOnClickListener(this);
         mCity.setOnClickListener(this);
         mPopularize_app.setOnClickListener(this);
         mMember_register.setOnClickListener(this);
         mUser_center.setOnClickListener(this);
         mAbout_us.setOnClickListener(this);
-
     }
 
     @Override
@@ -106,7 +103,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.myShop:
                 break;
             case R.id.city:
-                startActivity(new Intent(getContext(), CityServicesActivity.class));//城市服务activity
+                ARouter.getInstance().build(ARouterContract.CITY_SERVICES) //城市服务
+                        .navigation();
                 break;
             case R.id.popularize_app:
                 startActivity(new Intent(getContext(), PromotionActivity.class));//启动推广activity

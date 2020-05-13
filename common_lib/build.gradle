@@ -42,6 +42,7 @@ dependencies {
     androidTestImplementation rootProject.ext.testDeps["runner"]
     androidTestImplementation rootProject.ext.testDeps["espresso-core"]
 
+
     api project(":base_lib")
 
 }

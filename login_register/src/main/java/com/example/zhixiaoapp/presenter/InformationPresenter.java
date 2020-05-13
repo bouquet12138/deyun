@@ -62,7 +62,7 @@ public class InformationPresenter extends MVPBasePresenter<InformationContract.I
                     BaseBean baseBean1 = (BaseBean) msg.obj;
                     //getView().showToast(baseBean1.getMsg());
                     if (baseBean1.getCode() == 1) {
-                        if (NowUserInfo.getNowUserId() == getView().getUserId()) {
+                        if (NowUserInfo.getNowUserId() == getView().getUserID()) {
                             UserBean nowUserInfo = NowUserInfo.getNowUserInfo();
                             nowUserInfo.setInfo(getView().getModifyUserBean());//设置修改的信息
                             NowUserInfo.setNowUserInfo(nowUserInfo);//更新一下信息

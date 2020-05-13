@@ -27,6 +27,7 @@ public class MyEditText extends LinearLayout {
     private String mHintStr;
     private Integer mInputType;
     private Integer mMaxLength;
+    private Integer mMaxLines;
 
     public EditText getEditText() {
         return editText;
@@ -39,6 +40,7 @@ public class MyEditText extends LinearLayout {
         mHintStr = typedArray.getString(R.styleable.MyEditText_hint);
         mInputType = typedArray.getInteger(R.styleable.MyEditText_inputType, 0);//输入类型
         mMaxLength = typedArray.getInteger(R.styleable.MyEditText_maxLength, -1);
+        mMaxLines = typedArray.getInteger(R.styleable.MyEditText_maxLines, -1);
 
         typedArray.recycle();
 
@@ -60,11 +62,13 @@ public class MyEditText extends LinearLayout {
         editText = rootView.findViewById(R.id.editText);//编辑文本
         deleteImage = rootView.findViewById(R.id.deleteBtn);//删除按钮
 
+        if (mMaxLines != -1)
+            editText.setMaxLines(mMaxLines);//最大行数
+
         editText.setHint(mHintStr);//设置提醒文本
         if (mInputType == 2) {
             editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         }
-
         if (mMaxLength != -1)
             editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mMaxLength)});
 
@@ -91,7 +95,7 @@ public class MyEditText extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() == 0) {
+                if (s == null || s.length() == 0) {
                     deleteImage.setVisibility(INVISIBLE);//删除按钮可见
                 } else {
                     if (editText.hasFocus() && deleteImage.getVisibility() != VISIBLE)//当长度为0时，如果清空按钮可见，那么就消失

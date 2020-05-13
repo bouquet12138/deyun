@@ -63,7 +63,7 @@ dependencies {
     testImplementation rootProject.ext.testDeps["junit"]
     androidTestImplementation rootProject.ext.testDeps["runner"]
     androidTestImplementation rootProject.ext.testDeps["espresso-core"]
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+    annotationProcessor compilerDeps["arouter-compiler"]
 
     implementation project(':common_lib')
 }

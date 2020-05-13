@@ -18,16 +18,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CityServicesActivity" />
-        <activity android:name=".activity.PromotionActivity" />
-        <activity android:name=".activity.ServiceCenterActivity" />
-        <activity android:name=".activity.OptionActivity" />
-        <activity android:name=".activity.AppUpdateActivity" />
-        <activity android:name=".activity.ModifyPayPasswordActivity" />
-        <activity android:name=".activity.ModifyLoginPasswordActivity" />
-        <activity android:name=".activity.AccountManagerActivity" />
-        <activity android:name=".activity.AboutUsActivity" />
-        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.PromotionActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ServiceCenterActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.OptionActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.AppUpdateActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ModifyPayPasswordActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ModifyLoginPasswordActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.AccountManagerActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.AboutUsActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

@@ -10,7 +10,7 @@
         android:layout_marginTop="100dp"
         android:layout_width="150dp"
         android:layout_height="200dp"
-        android:src="@drawable/icon_circle"
+        android:src="@drawable/logo"
         />
 
     <View
@@ -24,7 +24,7 @@
         android:layout_marginBottom="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="山东炎德餐饮有限公司"
+        android:text="山东金德鑫鲜物联网科技有限公司"
         />
 
 </LinearLayout>

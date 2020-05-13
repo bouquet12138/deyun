@@ -2,8 +2,10 @@ package com.example.withdraw_module.activity;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import com.example.common_view.editText.MyEditText;
 import com.example.withdraw_module.R;
 import com.example.withdraw_module.contract.WithdrawContract;
 import com.example.withdraw_module.presenter.WithdrawPresenter;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 @Route(path = ARouterContract.WITHDRAW_WITHDRAW)
 public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawContract.IView {
@@ -45,6 +48,8 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
 
     private MyEditText mAccountText;
     private Button mConfirmBt;//确认按钮
+
+    private TextView mWithdrawRule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,7 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
         mConfirmBt = findViewById(R.id.confirmBt);//确认按钮
 
         mPasswordView.setEditText(mPassword.getEditText());//设置edit
+        mWithdrawRule = findViewById(R.id.withdrawTextView);
     }
 
     /**
@@ -90,6 +96,16 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
       /*  mBandCardText.setText(userBean.getBank_card());//银行卡号
         mAlipayText.setText(userBean.getPhone_num());//支付宝号
         mWechatText.setText(userBean.getPhone_num());//微信号*/
+
+        SharedPreferences sharedPreferences = getSharedPreferences("withdraw_rule", MODE_PRIVATE);//提现
+        boolean isFirst = sharedPreferences.getBoolean("isFirst", true);//第一次
+
+        if (isFirst) {//如果是第一次
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isFirst", false);
+            editor.apply();//应用一下
+            showWithdrawRule();
+        }
 
     }
 
@@ -132,6 +148,10 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
         });
 
         mConfirmBt.setOnClickListener(view -> onFloatBtClick());//确认
+
+        mWithdrawRule.setOnClickListener(view -> {
+            showWithdrawRule();//展示提现规则
+        });
 
     }
 
@@ -195,7 +215,7 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
         } catch (NumberFormatException e) {
         }
 
-        String password = mPassword.getText().toString();//密码
+        String password = mPassword.getText();//密码
         String remark = mRemark.getText();
 
         WithdrawBean withdrawBean = new WithdrawBean(userBean.getUser_id(), amount, password, remark);
@@ -214,6 +234,17 @@ public class WithdrawActivity extends AppMvpBaseActivity implements WithdrawCont
     protected void onDestroy() {
         mPresenter.detachView();//解除绑定
         super.onDestroy();
+    }
+
+    /**
+     * 展示提现规则
+     */
+    private void showWithdrawRule() {
+        new QMUIDialog.MessageDialogBuilder(this)
+                .setTitle("提现规则")
+                .setMessage(Html.fromHtml(getResources().getString(R.string.withdrawal_rules)))
+                .addAction("确定", (dialog, index) -> dialog.dismiss())
+                .show();
     }
 
     @Override
