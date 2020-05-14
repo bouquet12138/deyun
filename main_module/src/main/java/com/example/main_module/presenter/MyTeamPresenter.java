@@ -111,7 +111,7 @@ public class MyTeamPresenter extends MVPBasePresenter<MyTeamContract.IView>
 
     }
 
-    public void getMyTeamInfoNext(int userId) {
+    private void getMyTeamInfoNext(int userId) {
         if (!isViewAttached())
             return;
 

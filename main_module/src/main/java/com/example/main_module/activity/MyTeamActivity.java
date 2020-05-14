@@ -38,6 +38,12 @@ public class MyTeamActivity extends AppMvpBaseActivity implements MyTeamContract
         super.onCreate(savedInstanceState);
         initView();
         mPresenter.attachView(this);//绑定一下
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
         initData();
     }
 
@@ -105,6 +111,9 @@ public class MyTeamActivity extends AppMvpBaseActivity implements MyTeamContract
         mUserBeans.clear();//清空一下
 
         Log.d(TAG, "setTeamInfo: " + userBeans);
+
+        if (mUserBean.getUser_id() == NowUserInfo.getNowUserId())
+            mUserBean = NowUserInfo.getNowUserInfo();//更新一下
 
         if (userBeans != null)//不是空的话
             for (UserBean userBean : userBeans) {

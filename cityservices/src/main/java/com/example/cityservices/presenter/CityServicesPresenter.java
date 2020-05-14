@@ -8,7 +8,7 @@ import com.example.baselib.base.MVPBasePresenter;
 import com.example.baselib.listener.OnGetInfoListener;
 import com.example.baselib.util.CollectionsUtil;
 import com.example.baselib.util.NetWorkUtils;
-import com.example.cityservices.contract.ShowMerchantContract;
+import com.example.cityservices.contract.CityServicesContract;
 import com.example.common_lib.java_bean.BaseBean;
 import com.example.common_lib.java_bean.StoreBean;
 import com.example.common_lib.model.StoreModel;
@@ -16,8 +16,8 @@ import com.example.common_lib.model.StoreModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowMerchantPresenter extends MVPBasePresenter<ShowMerchantContract.IView>
-        implements ShowMerchantContract.IPresenter {
+public class CityServicesPresenter extends MVPBasePresenter<CityServicesContract.IView>
+        implements CityServicesContract.IPresenter {
 
     private static final int NUM = 10;
 
@@ -47,16 +47,16 @@ public class ShowMerchantPresenter extends MVPBasePresenter<ShowMerchantContract
                     BaseBean<List<StoreBean>> baseBean = (BaseBean<List<StoreBean>>) msg.obj;//得到用户id
                     //
                     if (baseBean.getCode() == 1) {
-                        if (CollectionsUtil.isEmpty(baseBean.getData())) {
-                            getView().setFootNoMoreData();//没有更多数据
-                        } else {
-                            mStoreBeans.clear();//清空一下
+                     /*   else {
+
+                        }*/
+                        mStoreBeans.clear();//清空一下
+                        if (!CollectionsUtil.isEmpty(baseBean.getData()))
                             mStoreBeans.addAll(baseBean.getData());//全部添加进来
-                            if (baseBean.getData().size() < NUM)
-                                getView().setFootNoMoreData();//没有更多数据
-                            getView().showNormalView();//展示正常view
-                            getView().refreshStoreList(mStoreBeans);//刷新一下
-                        }
+                        if (CollectionsUtil.isEmpty(baseBean.getData()) || baseBean.getData().size() < NUM)
+                            getView().setFootNoMoreData();//没有更多数据
+                        getView().showNormalView();//展示正常view
+                        getView().refreshStoreList(mStoreBeans);//刷新一下
                     } else {
                         getView().showToast(baseBean.getMsg());//弹出提示信息
                         getView().showNetError();//展示网络错误
@@ -142,7 +142,7 @@ public class ShowMerchantPresenter extends MVPBasePresenter<ShowMerchantContract
 
     }
 
-    private static final String TAG = "ShowMerchantPresenter";
+    private static final String TAG = "CityServicesPresenter";
 
     @Override
     public void refreshStoreInfo() {

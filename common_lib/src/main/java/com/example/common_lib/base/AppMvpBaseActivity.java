@@ -148,12 +148,16 @@ public abstract class AppMvpBaseActivity extends MVPBaseActivity implements IApp
      */
     @Override
     public void showSuccessHint(String hintStr) {
+        showSuccessHint(hintStr, 1000);
+    }
+
+    protected void showSuccessHint(String hintStr, long time) {
         mSuccessDialog = new QMUITipDialog.Builder(getContext())
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
                 .setTipWord(hintStr)
                 .create();
         mSuccessDialog.show();//展示一下
-        mBackButton.postDelayed(() -> mSuccessDialog.dismiss(), 1000);
+        mBackButton.postDelayed(() -> mSuccessDialog.dismiss(), time);
     }
 
     /**

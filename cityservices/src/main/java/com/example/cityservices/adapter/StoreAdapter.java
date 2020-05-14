@@ -11,9 +11,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.baselib.util.DensityUtil;
 import com.example.cityservices.R;
 import com.example.common_lib.info.ServerInfo;
 import com.example.common_lib.java_bean.StoreBean;
+import com.qmuiteam.qmui.layout.QMUILinearLayout;
 
 import java.util.List;
 
@@ -36,6 +38,9 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
+        holder.mRoot.setRadiusAndShadow(DensityUtil.dipToPx(5), DensityUtil.dipToPx(0), 1f);
+
         StoreBean bean = mStoreBeans.get(position);
         if (bean.getHead_img() == null) {
             holder.mStoreImg.setImageResource(R.drawable.image_loading);
@@ -58,7 +63,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        ViewGroup mRoot;
+        QMUILinearLayout mRoot;
         ImageView mStoreImg;
         TextView mStoreText;
 

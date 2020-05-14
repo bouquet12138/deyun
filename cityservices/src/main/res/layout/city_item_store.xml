@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.qmuiteam.qmui.layout.QMUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -21,4 +21,4 @@
         android:text="诸城市北半球店"
         android:textColor="@color/app_dark_text_color" />
 
-</LinearLayout>
+</com.qmuiteam.qmui.layout.QMUILinearLayout>

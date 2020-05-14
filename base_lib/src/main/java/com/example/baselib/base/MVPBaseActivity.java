@@ -23,13 +23,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MVPBaseActivity extends AppCompatActivity implements IMVPBaseView, NetChangeObserver {
 
-    private AppProgressBar appProgressBar;
+    //private AppProgressBar appProgressBar;
+    private QMUITipDialog mLoadingDialog;//加载dialog
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollector.addActivity(this);
-        appProgressBar = new AppProgressBar(this, "");
+        //     appProgressBar = new AppProgressBar(this, "");
 
         NetworkManager.getDefault().init(getApplication());
         NetworkManager.getDefault().setListener(this);
@@ -42,8 +43,9 @@ public class MVPBaseActivity extends AppCompatActivity implements IMVPBaseView, 
      */
     @Override
     public void setLoadingHint(String msg) {
-        if (appProgressBar != null)
-            appProgressBar.setHintText(msg);//设置提示信息
+       /* if (appProgressBar != null)
+            appProgressBar.setHintText(msg);//设置提示信息*/
+
     }
 
     /**
@@ -53,10 +55,11 @@ public class MVPBaseActivity extends AppCompatActivity implements IMVPBaseView, 
      */
     @Override
     public void showLoading(String msg) {
-        if (!appProgressBar.isShowing()) {
-            appProgressBar.show();
-            appProgressBar.setHintText(msg);//设置提示信息
-        }
+        mLoadingDialog = new QMUITipDialog.Builder(getContext())
+                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
+                .setTipWord(msg)
+                .create();
+        mLoadingDialog.show();//展示一下
     }
 
 
@@ -65,8 +68,8 @@ public class MVPBaseActivity extends AppCompatActivity implements IMVPBaseView, 
      */
     @Override
     public void hideLoading() {
-        if (appProgressBar.isShowing()) {
-            appProgressBar.dismiss();
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();//消失
         }
     }
 
@@ -103,6 +106,7 @@ public class MVPBaseActivity extends AppCompatActivity implements IMVPBaseView, 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        hideLoading();//隐藏loading
         ActivityCollector.removeActivity(this);
         NetworkManager.getDefault().logout();//注销监听
     }

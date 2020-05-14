@@ -5,7 +5,7 @@ import com.example.common_lib.java_bean.StoreBean;
 
 import java.util.List;
 
-public interface ShowMerchantContract {
+public interface CityServicesContract {
 
     interface IView extends IMVPBaseView {
 

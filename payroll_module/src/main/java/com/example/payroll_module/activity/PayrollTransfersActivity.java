@@ -29,7 +29,7 @@ public class PayrollTransfersActivity extends AppMvpBaseActivity implements Payr
     private PayrollTransfersPresenter mPresenter = new PayrollTransfersPresenter();
 
     private MyEditText mAmountNum;
-    private EditText mPassword;
+    private MyEditText mPassword;
     private ShowPasswordView mPasswordBt;
     private MyEditText mRemark;
     private MyEditText mTargetUserText;
@@ -59,7 +59,7 @@ public class PayrollTransfersActivity extends AppMvpBaseActivity implements Payr
         mUserNameText = findViewById(R.id.userNameText);
 
         mConfirmBt = findViewById(R.id.confirmBt);//确认按钮
-        mPasswordBt.setEditText(mPassword);
+        mPasswordBt.setEditText(mPassword.getEditText());
 
         mRemark.setText("转账");
 
@@ -77,21 +77,8 @@ public class PayrollTransfersActivity extends AppMvpBaseActivity implements Payr
         mAmountNum.setOnTextChangedListener(() -> {
             mConfirmBt.setEnabled(isRight());//提交是否可用
         });
-        mPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                mConfirmBt.setEnabled(isRight());//提交是否可用
-            }
+        mPassword.setOnTextChangedListener(() -> {
+            mConfirmBt.setEnabled(isRight());//提交是否可用
         });
         mTargetUserText.setOnTextChangedListener(() -> {
             mConfirmBt.setEnabled(isRight());//提交是否可用

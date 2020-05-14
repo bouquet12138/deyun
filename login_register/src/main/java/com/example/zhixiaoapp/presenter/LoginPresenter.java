@@ -154,7 +154,7 @@ public class LoginPresenter extends MVPBasePresenter<LoginContract.IView>
 
         boolean isAutoLogin = preferences.getBoolean("isAutoLogin", false);
         boolean isRememberPassWord = preferences.getBoolean("isRememberPassWord", false);
-        boolean agree = preferences.getBoolean("agree", true);
+        boolean agree = preferences.getBoolean("agree", false);
         getView().setAgree(agree);
 
         if (isAutoLogin)

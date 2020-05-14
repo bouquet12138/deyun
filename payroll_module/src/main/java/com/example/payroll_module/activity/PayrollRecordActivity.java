@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.baselib.adapter.MyFragmentAdapter;
+import com.example.baselib.util.CollectionsUtil;
 import com.example.common_lib.base.AppMvpBaseActivity;
 import com.example.common_lib.contract.ARouterContract;
 import com.example.common_lib.info.NowUserInfo;

@@ -144,6 +144,10 @@ public class InformationPresenter extends MVPBasePresenter<InformationContract.I
 
         UserBean userBean = getView().getModifyUserBean();
 
+        if (userBean.getHead_img_id() == 0 && userBean.getHead_img() != null) {
+            userBean.setHead_img_id(userBean.getHead_img().getImage_id());//设置头像id
+        }
+
         mModel.modifyUserInfo(userBean, new OnGetInfoListener<BaseBean>() {
             @Override
             public void onComplete() {

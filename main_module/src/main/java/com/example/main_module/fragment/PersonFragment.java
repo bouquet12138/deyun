@@ -11,6 +11,7 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.ImageView;
@@ -73,12 +74,15 @@ public class PersonFragment extends BaseFragment implements View.OnClickListener
         initData();
     }
 
+    private static final String TAG = "PersonFragment";
+    
     /**
      * 重新回到栈顶
      */
     @Override
     public void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume: ");
         initData();
     }
 

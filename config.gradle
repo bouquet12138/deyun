@@ -18,7 +18,7 @@ ext {
             rxKotlin                : "2.3.0",
             anko                    : "0.10.7",
             qmui                    : "2.0.0-alpha08",
-            permissionsdispatcher: "2.1.3"
+            permissionsdispatcher   : "2.1.3"
     ]
 
     supportDeps = [
@@ -51,18 +51,17 @@ ext {
             "SmartHead"             : "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0",
             "recyclerview-animators": "jp.wasabeef:recyclerview-animators:2.3.0",
             "qmui"                  : "com.qmuiteam:qmui:${dependVersion.qmui}",
-            "qmui-arch"              : "com.qmuiteam:arch:${dependVersion.qmui}",
+            "qmui-arch"             : "com.qmuiteam:arch:${dependVersion.qmui}",
             "banner"                : "com.youth.banner:banner:2.0.0-alpha",
             "MPAndroidChart"        : "com.github.PhilJay:MPAndroidChart:v3.1.0",
             "citypickerview"        : "liji.library.dev:citypickerview:5.2.2",
             "x-update"              : "com.github.xuexiangjys:XUpdate:1.1.4",
             "okhttputils"           : "com.zhy:okhttputils:2.6.2",
-            "permission"            : "com.github.hotchemi:permissionsdispatcher:${dependVersion.permissionsdispatcher}",
+            "easypermission"        : "pub.devrel:easypermissions:3.0.0"
     ]
 
     compilerDeps = [
             "arouter-compiler": 'com.alibaba:arouter-compiler:1.2.2',
-            "permissionsdispatcher" : "com.github.hotchemi:permissionsdispatcher-processor:${dependVersion.permissionsdispatcher}",
             "arch-compiler"   : "com.qmuiteam:arch-compiler:${dependVersion.qmui}"
     ]
 

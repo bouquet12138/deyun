@@ -4,7 +4,6 @@
 
     <application>
         <activity android:name=".activity.ServiceDetailsActivity"></activity>
-        <activity android:name=".activity.ShowMerchantActivity" />
         <activity android:name=".activity.CityServicesActivity" />
     </application>
 

@@ -59,7 +59,6 @@ dependencies {
     androidTestImplementation rootProject.ext.testDeps["espresso-core"]
 
     annotationProcessor compilerDeps["arouter-compiler"]
-    annotationProcessor compilerDeps["permissionsdispatcher"]
     annotationProcessor compilerDeps["arch-compiler"]
 
     implementation project(':common_lib')
