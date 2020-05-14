@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -90,8 +91,12 @@ public class ShowMerchantActivity extends MVPBaseActivity implements ShowMerchan
      * 初始化监听
      */
     private void initListener() {
-        mBackButton.setOnClickListener(view -> {
-            finish();
+        mBackButton.setOnClickListener(view -> finish());
+        mRefreshLayout.setOnRefreshListener(refreshLayout -> {
+            mPresenter.refreshStoreInfo();//刷新商店信息
+        });
+        mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            mPresenter.loadMoreStoreInfo();//加载更多信息
         });
     }
 
@@ -143,7 +148,7 @@ public class ShowMerchantActivity extends MVPBaseActivity implements ShowMerchan
             mStoreAdapter = new StoreAdapter(storeList);
             mRecyclerView.setAdapter(mStoreAdapter);//设置适配器
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));//设置布局管理器
-            mRecyclerView.addItemDecoration(new SpacesItemDecoration(DensityUtil.dipToPx(10)));
+            mRecyclerView.addItemDecoration(new SpacesItemDecoration(DensityUtil.dipToPx(5)));
             mStoreAdapter.setOnItemClickListener(storeBean -> {
                 Log.d(TAG, "refreshStoreList: 点击 ");
                 ServiceDetailsActivity.actionStart(ShowMerchantActivity.this, storeBean);//启动一下
@@ -185,7 +190,7 @@ public class ShowMerchantActivity extends MVPBaseActivity implements ShowMerchan
                 .setTipWord(msg)
                 .create();
         errorDialog.show();//展示一下
-        mBackButton.postDelayed(() -> errorDialog.dismiss(), 1000);
+        mBackButton.postDelayed(() -> errorDialog.dismiss(), 500);
     }
 
     @Override

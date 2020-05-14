@@ -2,6 +2,7 @@ package com.example.cityservices.presenter;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.example.baselib.base.MVPBasePresenter;
 import com.example.baselib.listener.OnGetInfoListener;
@@ -69,13 +70,12 @@ public class ShowMerchantPresenter extends MVPBasePresenter<ShowMerchantContract
                     break;
                 case REFRESH_SUCCESS:
                     BaseBean<List<StoreBean>> baseBean1 = (BaseBean<List<StoreBean>>) msg.obj;//得到用户id
+                    getView().showToast(baseBean1.getMsg());//弹出提示信息
                     if (baseBean1.getCode() == 1) {
                         if (!CollectionsUtil.isEmpty(baseBean1.getData())) {
                             mStoreBeans.addAll(0, baseBean1.getData());//全部添加进来
                             getView().refreshStoreList(mStoreBeans);//刷新一下
                         }
-                    } else {
-                        getView().showToast(baseBean1.getMsg());//弹出提示信息
                     }
                     break;
                 case REFRESH_NET_ERROR:
@@ -90,6 +90,8 @@ public class ShowMerchantPresenter extends MVPBasePresenter<ShowMerchantContract
                         if (!CollectionsUtil.isEmpty(baseBean2.getData())) {
                             mStoreBeans.addAll(baseBean2.getData());//全部添加进来
                             getView().refreshStoreList(mStoreBeans);//刷新一下
+                            if (baseBean2.getData().size() < NUM)
+                                getView().setFootNoMoreData();//没有更多数据
                         }
                     } else {
                         getView().showToast(baseBean2.getMsg());//弹出提示信息
@@ -140,6 +142,8 @@ public class ShowMerchantPresenter extends MVPBasePresenter<ShowMerchantContract
 
     }
 
+    private static final String TAG = "ShowMerchantPresenter";
+
     @Override
     public void refreshStoreInfo() {
 
@@ -150,6 +154,8 @@ public class ShowMerchantPresenter extends MVPBasePresenter<ShowMerchantContract
             getView().completeRefresh();//完成刷新
             return;
         }
+
+        Log.d(TAG, "refreshStoreInfo: onRes 刷新");
 
         int store_id = 0;
         if (!CollectionsUtil.isEmpty(mStoreBeans))

@@ -1,6 +1,7 @@
 package com.example.cityservices.activity;
 
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -13,7 +14,6 @@ import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +21,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.baselib.util.DensityUtil;
 import com.example.cityservices.R;
+import com.example.cityservices.adapter.GoodAdapter;
+import com.example.cityservices.utils.GridItemDecoration;
 import com.example.common_lib.base.AppMvpBaseActivity;
 import com.example.common_lib.info.ServerInfo;
 import com.example.common_lib.java_bean.StoreBean;
@@ -72,6 +74,18 @@ public class ServiceDetailsActivity extends AppMvpBaseActivity {
         mBusinessTime.setText("营业时间:" + mBean.getBusiness_hours());//营业时间
         mStoreDescribe.setText(mBean.getStore_describe());//详细
         mPhoneText.setText(mBean.getContact_phone());
+
+        StaggeredGridLayoutManager staggeredGridLayoutManager =
+                new StaggeredGridLayoutManager(2,
+                        StaggeredGridLayoutManager.VERTICAL);
+
+        GoodAdapter goodAdapter = new GoodAdapter(mBean.getProduct_imgs());//得到图片
+        mRecyclerView.setAdapter(goodAdapter);
+
+
+        GridItemDecoration gridItemDecoration = new GridItemDecoration(DensityUtil.dipToPx(5));
+        mRecyclerView.addItemDecoration(gridItemDecoration);//设置分割
+        mRecyclerView.setLayoutManager(staggeredGridLayoutManager);//瀑布布局
     }
 
     private void setTitle(String up, String down, TextView textView) {
