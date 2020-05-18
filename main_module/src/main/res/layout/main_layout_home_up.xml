@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><!--上面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp">
+    <!--购物商城-->
+    <LinearLayout
+        android:id="@+id/myShop"
+        style="@style/main_home_bt">
+
+        <ImageView
+            style="@style/main_drawable_style"
+            android:background="@drawable/main_back_b"
+            android:src="@drawable/main_shopping_shop" />
+
+        <TextView
+            style="@style/main_text_style"
+            android:text="购物商城" />
+
+    </LinearLayout>
+
+    <!--积分商城-->
+    <LinearLayout
+        android:id="@+id/integralShop"
+        style="@style/main_home_bt">
+
+        <ImageView
+            style="@style/main_drawable_style"
+            android:background="@drawable/main_back_e"
+            android:src="@drawable/main_integral_shop" />
+
+        <TextView
+            style="@style/main_text_style"
+            android:text="积分商城" />
+
+    </LinearLayout>
+
+    <!--城市服务-->
+    <LinearLayout
+        android:id="@+id/city"
+        style="@style/main_home_bt">
+
+        <ImageView
+            style="@style/main_drawable_style"
+            android:background="@drawable/main_back_c"
+            android:src="@drawable/main_city" />
+
+        <TextView
+            style="@style/main_text_style"
+            android:text="城市服务" />
+
+    </LinearLayout>
+
+
+    <!--会员注册-->
+    <LinearLayout
+        android:id="@+id/member_register"
+        style="@style/main_home_bt">
+
+        <ImageView
+            style="@style/main_drawable_style"
+            android:background="@drawable/main_back_a"
+            android:src="@drawable/main_member" />
+
+        <TextView
+            style="@style/main_text_style"
+            android:text="会员注册" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

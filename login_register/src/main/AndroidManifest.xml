@@ -24,6 +24,14 @@
         <activity
             android:name=".activity.InformationActivity"
             android:launchMode="singleTop" />
+
+        <activity
+            android:name=".activity.ModifyLoginPasswordActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.ModifyPayPasswordActivity"
+            android:launchMode="singleTop" />
+
     </application>
 
 </manifest>

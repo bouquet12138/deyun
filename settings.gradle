@@ -1,1 +1,1 @@
-include ':login_register', ':common_view', ':base_lib', ':common_lib', ':ui', ':main_module', ':withdraw_module', ':integral_module', ':payroll_module', ':cityservices'
+include ':login_register', ':common_view', ':base_lib', ':common_lib', ':ui', ':main_module', ':withdraw_module', ':integral_module', ':payroll_module', ':cityservices', ':flash_module', ':business_module'

@@ -127,14 +127,14 @@ public class PayrollTransfersActivity extends AppMvpBaseActivity implements Payr
      */
     private boolean isRight() {
 
-        Integer amount = 0;//提现金额
+        Integer amount = 0;//互转金额
         try {
             if (!TextUtils.isEmpty(mAmountNum.getText()))
                 amount = Integer.parseInt(mAmountNum.getText());//提现金额
         } catch (NumberFormatException e) {
         }
 
-        String password = mPassword.getText().toString();//密码
+        String password = mPassword.getText();//密码
 
         String targetUser = mTargetUserText.getText();
         if (amount != 0 && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(targetUser) && targetUser.length() == 11)

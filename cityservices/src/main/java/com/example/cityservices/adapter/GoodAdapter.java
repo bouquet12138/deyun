@@ -50,10 +50,16 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mRoot.setRadiusAndShadow(DensityUtil.dipToPx(5), DensityUtil.dipToPx(5), 1f);
         ImageBean bean = mImageBeans.get(position);//图片bean
-        Glide.with(mContext).
-                load(ServerInfo.getImageAddress(bean.getImage_url())).
-                placeholder(R.drawable.image_loading).error(R.drawable.image_error).into(holder.mGood_image);//添加图片
-        holder.mImage_describe.setText(bean.getImage_describe());//设置图片的描述
+        if (bean != null) {
+            Glide.with(mContext).
+                    load(ServerInfo.getImageAddress(bean.getImage_url())).
+                    placeholder(R.drawable.image_loading).error(R.drawable.image_error).into(holder.mGood_image);//添加图片
+            holder.mImage_describe.setText(bean.getImage_describe());//设置图片的描述
+        } else {
+            Glide.with(mContext).
+                    load(R.drawable.image_loading).into(holder.mGood_image);//添加图片
+            holder.mImage_describe.setText("");//设置图片的描述
+        }
     }
 
     @Override

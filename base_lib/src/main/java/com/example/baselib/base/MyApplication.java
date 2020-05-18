@@ -131,7 +131,7 @@ public class MyApplication extends Application {
         sInstance = this;
         sContext = this;
 
-        // yichang();
+        yichang();
 
         Utils.init(this);
 

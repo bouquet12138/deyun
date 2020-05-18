@@ -10,7 +10,7 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
@@ -68,6 +68,7 @@ dependencies {
         implementation project(':withdraw_module')
         implementation project(':integral_module')
         implementation project(':payroll_module')
+        implementation project(':flash_module')
         implementation project(':cityservices')
     }
 }

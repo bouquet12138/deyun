@@ -129,16 +129,18 @@ public class AccountManagerActivity extends AppMvpBaseActivity implements View.O
         if (i == R.id.backButton) {
             finish();//销毁
         } else if (i == R.id.modifyPass) { //修改密码
-            startActivity(new Intent(this, ModifyLoginPasswordActivity.class));
+            ARouter.getInstance().build(ARouterContract.LOGIN_MODIFY_LOGIN_PW) //修改登陆密码
+                    .navigation();
         } else if (i == R.id.modifyPayPass) { //修改密码
-            startActivity(new Intent(this, ModifyPayPasswordActivity.class));
+            ARouter.getInstance().build(ARouterContract.LOGIN_MODIFY_PAY_PW) //修改支付密码
+                    .navigation();
         } else if (i == R.id.cleanCache) {//清理缓存
             if ("0.0B".equals(mCacheText.getText().toString()))
                 Toast.makeText(this, "没有缓存", Toast.LENGTH_SHORT).show();
             else
                 clearImageAllCache(AccountManagerActivity.this);
         } else if (i == R.id.appUpdate) {//app更新
-             startActivity(new Intent(this, AppUpdateActivity.class));
+            startActivity(new Intent(this, AppUpdateActivity.class));
         } else if (i == R.id.option) {
             startActivity(new Intent(this, OptionActivity.class));//启动意见活动
         } else if (i == R.id.exitCurrentAccount) {//退出当前账号
@@ -195,12 +197,6 @@ public class AccountManagerActivity extends AppMvpBaseActivity implements View.O
         String ImageExternalCatchDir = context.getExternalCacheDir() + ExternalPreferredCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR;
         deleteFolderFile(ImageExternalCatchDir, true);
     }
-
-
-
-
-
-
 
 
 }

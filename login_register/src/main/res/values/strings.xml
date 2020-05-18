@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">zhiXiaoApp</string>
 
     <!--隐私政策-->
-    <string name="privacy_policy">
+    <string name="login_privacy_policy">
         <Data><![CDATA[
         <p>您在使用我们的服务时，我们可能会收集和使用您的相关信息。
         <br />我们希望通过本《隐私政策》向您说明，在使用我们的服务时，我们如何收集、使用、储存和分享这些信息，以及我们为您提供的访问、更新、控制和保护这些信息的方式。
@@ -121,7 +120,7 @@
         ]]></Data>
     </string>
     <!--用户协议-->
-    <string name="user_agreement">
+    <string name="login_user_agreement">
         <![CDATA[
         <p>请您使用本产品之前，请务必仔细阅读并理解《用户许可使用协议》（以下简称“本协议”）中规定的多有权利和限制。
             <br/>我们一向尊重并会严格保护用户在使用本产品时的合法权益（包括用户隐私、用户数据等）不受到任何侵犯。

@@ -10,6 +10,8 @@
         android:roundIcon="@drawable/icon_circle"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.ShoppingActivity"></activity>
+        <activity android:name=".activity.IntegralShopActivity" />
         <activity android:name=".activity.MyTeamActivity" />
         <activity android:name=".activity.MainStartActivity">
             <intent-filter>
@@ -29,12 +31,6 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".activity.AppUpdateActivity"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".activity.ModifyPayPasswordActivity"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".activity.ModifyLoginPasswordActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".activity.AccountManagerActivity"

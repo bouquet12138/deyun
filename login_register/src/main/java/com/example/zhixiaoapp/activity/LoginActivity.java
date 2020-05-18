@@ -88,12 +88,12 @@ public class LoginActivity extends MVPBaseActivity implements LoginContract.IVie
 
         mUserText.setOnClickListener(v -> new QMUIDialog.MessageDialogBuilder(this)
                 .setTitle("用户协议")
-                .setMessage(Html.fromHtml(getResources().getString(R.string.user_agreement)))
+                .setMessage(Html.fromHtml(getResources().getString(R.string.login_user_agreement)))
                 .addAction("确定", (dialog, index) -> dialog.dismiss())
                 .show());
         mPrivacyText.setOnClickListener(v -> new QMUIDialog.MessageDialogBuilder(this)
                 .setTitle("隐私条例")
-                .setMessage(Html.fromHtml(getResources().getString(R.string.user_agreement)))
+                .setMessage(Html.fromHtml(getResources().getString(R.string.login_user_agreement)))
                 .addAction("确定", (dialog, index) -> dialog.dismiss())
                 .show());
         mConfirmBt.setOnClickListener(view -> {
@@ -180,7 +180,7 @@ public class LoginActivity extends MVPBaseActivity implements LoginContract.IVie
     public void showPrivacy() {
         new QMUIDialog.MessageDialogBuilder(this)
                 .setTitle("隐私条例")
-                .setMessage(Html.fromHtml(getResources().getString(R.string.user_agreement)))
+                .setMessage(Html.fromHtml(getResources().getString(R.string.login_user_agreement)))
                 .addAction("确定", (dialog, index) -> dialog.dismiss())
                 .show();
     }

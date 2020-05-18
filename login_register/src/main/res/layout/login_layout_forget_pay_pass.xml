@@ -62,8 +62,8 @@
             android:layout_weight="1"
             app:hint="6-20位"
             android:layout_marginLeft="5dp"
-            app:inputType="textPassword"
-            app:maxLength="20"></com.example.common_view.editText.MyEditText>
+            app:inputType="number_password"
+            app:maxLength="6"></com.example.common_view.editText.MyEditText>
 
         <com.example.common_view.custom_view.ShowPasswordView
             android:id="@+id/passwordBt1"
@@ -87,8 +87,8 @@
             android:layout_weight="1"
             app:hint="6-20位"
             android:layout_marginLeft="5dp"
-            app:inputType="textPassword"
-            app:maxLength="20"></com.example.common_view.editText.MyEditText>
+            app:inputType="number_password"
+            app:maxLength="6"></com.example.common_view.editText.MyEditText>
 
         <com.example.common_view.custom_view.ShowPasswordView
             android:id="@+id/passwordBt2"

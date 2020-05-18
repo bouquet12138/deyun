@@ -14,14 +14,14 @@
         <!--修改密码-->
         <LinearLayout
             android:id="@+id/modifyPass"
-            style="@style/main_person_line_layout">
+            style="@style/login_person_line_layout">
 
             <ImageView
-                style="@style/main_person_image"
+                style="@style/login_person_image"
                 android:src="@drawable/login_modify" />
 
             <TextView
-                style="@style/main_person_line_text"
+                style="@style/login_person_line_text"
                 android:text="修改登陆密码" />
 
 
@@ -29,19 +29,19 @@
 
 
         <!--一根线-->
-        <View style="@style/main_divider" />
+        <View style="@style/login_divider" />
 
         <!--修改支付密码-->
         <LinearLayout
             android:id="@+id/modifyPayPass"
-            style="@style/main_person_line_layout">
+            style="@style/login_person_line_layout">
 
             <ImageView
-                style="@style/main_person_image"
+                style="@style/login_person_image"
                 android:src="@drawable/login_modify" />
 
             <TextView
-                style="@style/main_person_line_text"
+                style="@style/login_person_line_text"
                 android:text="修改支付密码" />
 
 
